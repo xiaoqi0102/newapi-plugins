@@ -255,12 +255,25 @@
         "sdas-qd-seedance-2.0-mini-no-face-720p",
         "sdas-qd-seedance-2.0-no-face-480p"
       ],
-      "latest": "1.0.1",
+      "latest": "1.0.2",
       "versions": [
         {
           "version": "1.0.1",
           "path": "plugins/tasks/sudashui/1.0.1/plugin.js",
           "sha256": "402cdab71b6fdec6d9f360cb00a3c38833943e712263bc0d37405a7b45ba3edb",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "api.sudashuiapi.com",
+            "files.sudashuiapi.com",
+            "www.sudashuiapi.com"
+          ],
+          "baseUrl": "https://api.sudashuiapi.com"
+        },
+        {
+          "version": "1.0.2",
+          "path": "plugins/tasks/sudashui/1.0.2/plugin.js",
+          "sha256": "39552d4498d611f0d2aa90599d3e8ecfce6031ce2a8fd16a840c9940eea03927",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
