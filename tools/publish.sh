@@ -21,9 +21,21 @@ if git diff --cached --quiet; then
 fi
 git -c core.hooksPath=.githooks commit -m "$MSG"
 
-echo "==> 4/4 推送"
+echo "==> 4/5 推送"
 git -c credential.helper='!gh auth git-credential' push origin main
+
+echo "==> 5/5 刷新 jsDelivr 缓存(不刷新的话市场源最长 12 小时还在发旧索引)"
+PURGE="https://purge.jsdelivr.net/gh/xiaoqi0102/newapi-plugins@main"
+TARGETS="$PURGE/index.json"
+for f in $(git show --name-only --pretty=format: HEAD); do
+  case "$f" in plugins/*) TARGETS="$TARGETS $PURGE/$f" ;; esac
+done
+for u in $TARGETS; do
+  code=$(curl -s -o /dev/null -w '%{http_code}' "$u" || echo 000)
+  echo "    purge HTTP $code  ${u##*@main/}"
+done
 
 echo
 git log --oneline -1
-echo "完成。jsDelivr 会自动跟随(约数秒);市场源无需重新添加。"
+echo "完成。市场源无需重新添加;若上面 purge 不是 200,手动再跑:"
+echo "    curl -sS $PURGE/index.json"
