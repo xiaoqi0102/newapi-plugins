@@ -60,14 +60,25 @@ SELECT id, status, fail_reason,
 FROM tasks WHERE channel_id = <本渠道 id> ORDER BY id DESC LIMIT 10;
 ```
 
-`reference_image_fields` 是判断**客户端用的哪套协议**的关键:
+`reference_image_fields` 是判断**客户端用的哪套协议**的关键(取值实测,2026-09-16):
 
 | 取值 | 含义 |
 |---|---|
-| `["image_urls"]` | 盐值AI「**统一视频入口**」协议(也认 `video_urls` / `audio_urls`) |
-| `["image_refs"]` / `["image_refs(base64)"]` | OpenAI 兼容协议(默认),图片走内联 base64 |
+| `["image_urls"]` | 盐值AI「**统一视频入口**」协议 —— **实测这条是唯一实际会出现的** |
+| `["image_refs"]` / `["image_refs(base64)"]` | OpenAI 兼容协议,图片内联 base64 |
 | `["reference_images(上传文件)"]` | multipart 上传的文件 |
 | `["metadata.start_frame"]` 等 | 图片藏在嵌套字段里 |
+
+> ⚠️ **为什么实际只会看到 `image_urls`**:盐值AI 桌面客户端若把本地图内联成 base64,
+> 请求体会膨胀到几十 MB(单图 base64 ≈ 原图 ×1.37),上游和网关都会直接判失败。
+> 所以客户端**强制先上传拿公网 URL**,再以 `image_urls` 提交;本地素材不是公网地址时它
+> 会在客户端就报错、根本不发出请求。此表其余取值仅作**异常配置的识别信号**用。
+>
+> 注意:**素材上传是客户端直连图床完成的,不经过本网关**(设置 → 视频 → 参考素材中转:
+> 免费图床 uguu/litterbox/catbox/0x0/imgbb、自定义上传接口、阿里云 OSS、腾讯云 COS、
+> Cloudflare R2、AWS S3)。因此素材 URL 的**可达性与有效期**完全由该设置决定 ——
+> 用 uguu 这类免费图床(约 3 小时过期)时上游容易抓取失败导致出片失败,
+> 建议改成自有 OSS/COS/R2。实测:同一客户端一次用 uguu、一次用上游自有文件站,后者更稳。
 
 其余字段:`reference_images`(落库的公网 URL,最多 8 条)、`reference_images_uploaded`、
 `reference_images_base64`、`reference_videos` / `reference_audios`(数量)、`seconds`、
