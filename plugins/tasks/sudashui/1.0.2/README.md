@@ -23,11 +23,13 @@ NewAPI 实例,所以模型 id、`/v1/models`、`/api/pricing` 的形态都是 Ne
 2. **Base URL**:`https://api.sudashuiapi.com`
 3. **密钥**:`sk-…`(该站 API Key;换访问令牌可用它调 `/api/user/self`、`/api/pricing`)
 4. **模型**:见下表,推荐先用 6 个「最便宜 + 支持真人」档
-5. **模型定价**:该站报价单位是**人民币**,本网关额度按美元看 ⇒
-   **单价 = 人民币价 ÷ 7.3**(不除的话会按 7.3 倍超额计费)
+5. **模型定价**:直接照抄该站 `/api/pricing` 的 **`model_price`** ——
+   它是**「美元/次」**,与本网关 `ModelPrice` 同单位,**1:1 直接用,不要做任何汇率换算**
 
-> 拿价小技巧:该站 `/api/pricing` 需要登录,但**站点公告是公开的**,新上线 / 调价 / 下架
-> 连单价都写在公告里,单位写「元/条」= 按次、写「元/秒」= 按秒。
+> ⛔ **别踩这个坑(2026-09-16 已踩并纠正)**:该站公告/描述里写「元/条」只是**渲染口径**,
+> 拿它 ÷7.3 会让本站比上游**少记 7.3 倍**(本站记 $0.1137,上游实收 $0.83)。
+> ✅ **拿不到 `/api/pricing` 时的最稳办法**:跑一条真实任务后查上游任务详情,
+> **`data.quota ÷ 500000` = 上游实收美元**(实测 `quota=415000` = 0.83×500000 ✓)。
 
 ## 上游协议差异(插件已全部翻译好)
 
@@ -94,39 +96,39 @@ FROM tasks WHERE channel_id = <本渠道 id> ORDER BY id DESC LIMIT 10;
   (源码里的 `allowedHosts` 只是**插件自身**允许出网的域名,跟素材 URL 无关。)
 - 素材只收 jpg/png/webp、mp4/mov、mp3/wav(**不收 gif**)
 
-## 模型清单(27 个按次视频模型,单价为上游人民币报价)
+## 模型清单(27 个按次视频模型,单价 = 上游 `model_price`,单位**美元/次**,1:1 直接用)
 
 ✅ = 已在参考渠道挂载的 6 个「最便宜 + 支持真人」档。
 
 | 模型 | 单价 | 参考素材 / 时长 | 真人 |
 |---|---|---|---|
-| ✅ `sdas-pd-sd2.0-mini-903-480p` | ¥0.83 | 9图0视频3音频,5-15s | 支持 |
-| ✅ `sdas-pd-sd2.0-mini-903-720p` | ¥0.85 | 9图0视频3音频,5-12s | 支持 |
-| ✅ `sdas-wf-sd2.0-mini-933-480p` | ¥1.24 | 9图3视频3音频,4-15s | 支持 |
-| ✅ `sdas-wf-sd2.0-mini-933-720p` | ¥1.24 | 9图3视频3音频,4-12s | 支持 |
-| ✅ `sdas-xl-sd2.0-903-mini-480p` | ¥1.50 | 9图0视频3音频,15s | 支持 |
-| ✅ `sdas-qd-seedance-2.0-mini-480p` | ¥1.50 | 9图3视频3音频,4-15s | 支持 |
-| `sdas-qd-seedance-2.0-mini-no-face-480p` | ¥1.50 | 同上 | 卡人 |
-| `sdas-mj-minimax-h3-2k` | ¥1.80 | 海螺 h3,9图0视频3音频,4-15s | 支持 |
-| `sdas-qd-seedance-2.0-fast-480p` | ¥2.00 | 9图3视频3音频,4-15s | 支持 |
-| `sdas-qd-seedance-2.0-fast-no-face-480p` | ¥2.00 | 同上 | 卡人 |
-| `sdas-qd-seedance-2.0-mini-720p` | ¥2.20 | 9图3视频3音频,4-15s | 支持 |
-| `sdas-qd-seedance-2.0-mini-no-face-720p` | ¥2.20 | 同上 | 卡人 |
-| `sdas-qd-seedance-2.0-480p` | ¥2.50 | 9图3视频3音频,4-15s | 支持 |
-| `sdas-qd-seedance-2.0-no-face-480p` | ¥2.50 | 同上 | 卡人 |
-| `sdas-qd-seedance-2.0-fast-720p` | ¥2.80 | 9图3视频3音频,4-15s | 支持 |
-| `sdas-qd-seedance-2.0-fast-no-face-720p` | ¥2.80 | 同上 | 卡人 |
-| `sdas-hn-sd2.0-fast-720p` | ¥2.80 | 4图3视频1音频,5/10/15s | 支持 |
-| `sdas-qd-seedance-2.0-720p` | ¥3.50 | 9图3视频3音频,4-15s | 支持 |
-| `sdas-qd-seedance-2.0-no-face-720p` | ¥3.50 | 同上 | 卡人 |
-| `sdas-ll-sd2.5-pro-30s-720p` | ¥5.25 | 30图3视频,固定 30s | 支持 |
-| `sdas-hn-sd2.0-933-720p` | ¥5.50 | — | 支持 |
-| `sdas-qd-seedance-2.0-1080p` | ¥5.50 | 9图3视频3音频,4-15s | 支持 |
-| `sdas-qd-seedance-2.0-no-face-1080p` | ¥5.50 | 同上 | 卡人 |
-| `sdas-xg-sd2.0-pro-933-2-720p` | ¥5.70 | — | 支持 |
-| `sdas-hn-sd2.0-pro-933-720p` | ¥6.60 | 9图3视频3音频,15s | 支持 |
-| `sdas-qd-seedance-2.0-4k` | ¥16.00 | 9图3视频3音频,4-15s | 支持 |
-| `sdas-qd-seedance-2.0-no-face-4k` | ¥16.00 | 同上 | 卡人 |
+| ✅ `sdas-pd-sd2.0-mini-903-480p` | $0.83 | 9图0视频3音频,5-15s | 支持 |
+| ✅ `sdas-pd-sd2.0-mini-903-720p` | $0.85 | 9图0视频3音频,5-12s | 支持 |
+| ✅ `sdas-wf-sd2.0-mini-933-480p` | $1.24 | 9图3视频3音频,4-15s | 支持 |
+| ✅ `sdas-wf-sd2.0-mini-933-720p` | $1.24 | 9图3视频3音频,4-12s | 支持 |
+| ✅ `sdas-xl-sd2.0-903-mini-480p` | $1.50 | 9图0视频3音频,15s | 支持 |
+| ✅ `sdas-qd-seedance-2.0-mini-480p` | $1.50 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-mini-no-face-480p` | $1.50 | 同上 | 卡人 |
+| `sdas-mj-minimax-h3-2k` | $1.80 | 海螺 h3,9图0视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-fast-480p` | $2.00 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-fast-no-face-480p` | $2.00 | 同上 | 卡人 |
+| `sdas-qd-seedance-2.0-mini-720p` | $2.20 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-mini-no-face-720p` | $2.20 | 同上 | 卡人 |
+| `sdas-qd-seedance-2.0-480p` | $2.50 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-no-face-480p` | $2.50 | 同上 | 卡人 |
+| `sdas-qd-seedance-2.0-fast-720p` | $2.80 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-fast-no-face-720p` | $2.80 | 同上 | 卡人 |
+| `sdas-hn-sd2.0-fast-720p` | $2.80 | 4图3视频1音频,5/10/15s | 支持 |
+| `sdas-qd-seedance-2.0-720p` | $3.50 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-no-face-720p` | $3.50 | 同上 | 卡人 |
+| `sdas-ll-sd2.5-pro-30s-720p` | $5.25 | 30图3视频,固定 30s | 支持 |
+| `sdas-hn-sd2.0-933-720p` | $5.50 | — | 支持 |
+| `sdas-qd-seedance-2.0-1080p` | $5.50 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-no-face-1080p` | $5.50 | 同上 | 卡人 |
+| `sdas-xg-sd2.0-pro-933-2-720p` | $5.70 | — | 支持 |
+| `sdas-hn-sd2.0-pro-933-720p` | $6.60 | 9图3视频3音频,15s | 支持 |
+| `sdas-qd-seedance-2.0-4k` | $16.00 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-no-face-4k` | $16.00 | 同上 | 卡人 |
 
 上游「按量计费」那批(`sdas-mg-*` / `sdas-rd-*` 等,单位元/秒)与 6 个图片模型
 (`jy-*`、`sdas-zh-gtp-img2`)**本插件不声明**,以匹配"只接按次"的计费口径。
@@ -138,5 +140,5 @@ FROM tasks WHERE channel_id = <本渠道 id> ORDER BY id DESC LIMIT 10;
   补 `HTTPUpstreamTimeout → ResponseTimeout: 600`,**保存后记得发布**。
 - 上游文档里的失败样例原文 `"fail_reason": "Real human faces are not supported."` ——
   带 `no-face` 的型号不要用来做真人脸;要真人选上表标「支持」的。
-- 实测参考:480p 档提交仅 **986 ms**、出片约 20 分钟、扣费 $0.1137(¥0.83 档)——
+- 实测参考:480p 档提交仅 **986 ms**、出片约 20 分钟、扣费 **$0.83**(与上游 1:1)——
   该站受理轻,基本不会触发 524。
