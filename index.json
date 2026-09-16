@@ -1,0 +1,326 @@
+{
+  "indexVersion": 1,
+  "name": "xiaoqi NewAPI Task Plugins",
+  "plugins": [
+    {
+      "key": "aicost",
+      "name": "aicost API",
+      "icon": "text:aicost",
+      "description": {
+        "en": "aicost.me relay: Seedance / MiniMax H3 video and GPT-Image / Gemini image, per-call models only.",
+        "zh": "aicost.me 中转:Seedance / MiniMax H3 视频与 GPT-Image / Gemini 图片,仅按次计费模型。"
+      },
+      "models": [
+        "gpt-image-2",
+        "gpt-image-2.5-flare",
+        "gpt-image-2.5-sunburst",
+        "gemini-3-pro-image-preview",
+        "gemini-3.1-flash-image-preview",
+        "seedance2.0-900-3",
+        "seedance2.5-vid",
+        "seedance2.0-480p",
+        "seedance2.0-720p",
+        "seedance2.5-900"
+      ],
+      "latest": "1.0.5",
+      "versions": [
+        {
+          "version": "1.0.5",
+          "path": "plugins/tasks/aicost/1.0.5/plugin.js",
+          "sha256": "397d0c80086f54913e7fe01e90f1f5fe76ad36b482ad3159a6fbba4d611b7d30",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "www.aicost.me",
+            "aicost.me"
+          ],
+          "baseUrl": "https://www.aicost.me"
+        }
+      ],
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/aicost/v1/images/generations",
+          "type": "submit",
+          "action": "image",
+          "decode": "decodeImageSubmit",
+          "render": "imageResult",
+          "models": [
+            "gpt-image-2",
+            "gpt-image-2.5-flare",
+            "gpt-image-2.5-sunburst",
+            "gemini-3-pro-image-preview",
+            "gemini-3.1-flash-image-preview"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/aicost/v1/images/edits",
+          "type": "submit",
+          "action": "image",
+          "decode": "decodeImageEditSubmit",
+          "render": "imageResult",
+          "models": [
+            "gpt-image-2",
+            "gpt-image-2.5-flare",
+            "gpt-image-2.5-sunburst",
+            "gemini-3-pro-image-preview",
+            "gemini-3.1-flash-image-preview"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/aicost/v1/gemini-images",
+          "type": "submit",
+          "action": "image",
+          "decode": "decodeGeminiImageSubmit",
+          "render": "imageResult",
+          "models": [
+            "gemini-3-pro-image-preview",
+            "gemini-3.1-flash-image-preview"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/aicost/v1/images/tasks/:task_id",
+          "type": "query",
+          "render": "imageTaskStatus"
+        }
+      ],
+      "protocols": [
+        {
+          "name": "openai_video",
+          "models": [
+            "seedance2.0-900-3",
+            "seedance2.5-vid",
+            "seedance2.0-480p",
+            "seedance2.0-720p",
+            "seedance2.5-900"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "jiasuapi",
+      "name": "佳速API",
+      "icon": "text:佳速",
+      "description": {
+        "en": "JiasuAPI image & video media platform. Official site: https://ai.jiasuapi.com/",
+        "zh": "佳速API中转平台（图片、视频中转平台）。官方地址：https://ai.jiasuapi.com/"
+      },
+      "models": [
+        "gpt-image-2.5-1k",
+        "gpt-image-2.5-sunburst-1k",
+        "jimeng-5.0",
+        "sd-2.0-720",
+        "sd-2.0-720-fast",
+        "sd-2.0-933-720-fast-原生真人",
+        "sd-2.0-933-720-满血原生真人",
+        "seedance-2.0-900",
+        "seedance-2.0-933",
+        "seedance-2.5-101010",
+        "seedance-2.5-301010",
+        "seedance-2.5-900",
+        "seedance-2.0-900-不重试",
+        "seedance-2.0-933-不重试",
+        "seedance-2.5-900-不重试",
+        "seedance-2.5-101010-不重试",
+        "seedance-2.5-301010-不重试"
+      ],
+      "latest": "1.0.7",
+      "versions": [
+        {
+          "version": "1.0.7",
+          "path": "plugins/tasks/jiasuapi/1.0.7/plugin.js",
+          "sha256": "c66cdfc759404494ed6f263f8c72772c3df01f802585cdee216a6d7cabee2e88",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "ai.jiasuapi.com",
+            "ai1.jiasuapi.com",
+            "api.jiasuapi.com",
+            "relay.jiasuapi.com",
+            "m.jiasuapi.com",
+            "media.jiasuapi.com"
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/jiasuapi/v1/videos/generations",
+          "type": "submit",
+          "action": "video",
+          "decode": "decodeVideoSubmit",
+          "render": "taskCreatedJsapi",
+          "models": [
+            "sd-2.0-720",
+            "sd-2.0-720-fast",
+            "sd-2.0-933-720-fast-原生真人",
+            "sd-2.0-933-720-满血原生真人",
+            "seedance-2.0-900",
+            "seedance-2.0-933",
+            "seedance-2.5-101010",
+            "seedance-2.5-301010",
+            "seedance-2.5-900",
+            "seedance-2.0-900-不重试",
+            "seedance-2.0-933-不重试",
+            "seedance-2.5-900-不重试",
+            "seedance-2.5-101010-不重试",
+            "seedance-2.5-301010-不重试"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/jiasuapi/v1/images/create",
+          "type": "submit",
+          "action": "image",
+          "decode": "decodeImageSubmit",
+          "render": "taskCreatedJsapi",
+          "models": [
+            "gpt-image-2.5-1k",
+            "gpt-image-2.5-sunburst-1k",
+            "jimeng-5.0"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/jiasuapi/v1/videos/tasks/:task_id",
+          "type": "query",
+          "render": "taskStatusJsapi"
+        },
+        {
+          "method": "GET",
+          "path": "/jiasuapi/v1/images/tasks/:task_id",
+          "type": "query",
+          "render": "taskStatusJsapi"
+        }
+      ],
+      "protocols": [
+        {
+          "name": "openai_video",
+          "models": [
+            "sd-2.0-720",
+            "sd-2.0-720-fast",
+            "sd-2.0-933-720-fast-原生真人",
+            "sd-2.0-933-720-满血原生真人",
+            "seedance-2.0-900",
+            "seedance-2.0-933",
+            "seedance-2.5-101010",
+            "seedance-2.5-301010",
+            "seedance-2.5-900",
+            "seedance-2.0-900-不重试",
+            "seedance-2.0-933-不重试",
+            "seedance-2.5-900-不重试",
+            "seedance-2.5-101010-不重试",
+            "seedance-2.5-301010-不重试"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "sudashui",
+      "name": "SdAS API",
+      "icon": "text:sdas",
+      "description": {
+        "en": "SdAS API (sudashuiapi.com) video generation, per-call models.",
+        "zh": "SdAS API(sudashuiapi)视频生成,仅按次计费模型。"
+      },
+      "models": [
+        "sdas-mj-minimax-h3-2k",
+        "sdas-xl-sd2.0-903-mini-480p",
+        "sdas-qd-seedance-2.0-fast-480p",
+        "sdas-qd-seedance-2.0-no-face-720p",
+        "sdas-wf-sd2.0-mini-933-480p",
+        "sdas-hn-sd2.0-933-720p",
+        "sdas-hn-sd2.0-pro-933-720p",
+        "sdas-qd-seedance-2.0-480p",
+        "sdas-qd-seedance-2.0-fast-720p",
+        "sdas-qd-seedance-2.0-fast-no-face-720p",
+        "sdas-wf-sd2.0-mini-933-720p",
+        "sdas-hn-sd2.0-fast-720p",
+        "sdas-qd-seedance-2.0-1080p",
+        "sdas-qd-seedance-2.0-fast-no-face-480p",
+        "sdas-pd-sd2.0-mini-903-720p",
+        "sdas-qd-seedance-2.0-mini-no-face-480p",
+        "sdas-qd-seedance-2.0-no-face-1080p",
+        "sdas-xg-sd2.0-pro-933-2-720p",
+        "sdas-qd-seedance-2.0-no-face-4k",
+        "sdas-ll-sd2.5-pro-30s-720p",
+        "sdas-qd-seedance-2.0-4k",
+        "sdas-qd-seedance-2.0-720p",
+        "sdas-qd-seedance-2.0-mini-720p",
+        "sdas-qd-seedance-2.0-mini-480p",
+        "sdas-pd-sd2.0-mini-903-480p",
+        "sdas-qd-seedance-2.0-mini-no-face-720p",
+        "sdas-qd-seedance-2.0-no-face-480p"
+      ],
+      "latest": "1.0.1",
+      "versions": [
+        {
+          "version": "1.0.1",
+          "path": "plugins/tasks/sudashui/1.0.1/plugin.js",
+          "sha256": "402cdab71b6fdec6d9f360cb00a3c38833943e712263bc0d37405a7b45ba3edb",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "api.sudashuiapi.com",
+            "files.sudashuiapi.com",
+            "www.sudashuiapi.com"
+          ],
+          "baseUrl": "https://api.sudashuiapi.com"
+        }
+      ],
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/sudashui/v1/videos/generations",
+          "type": "submit",
+          "action": "video",
+          "decode": "decodeVideoSubmit",
+          "render": "taskCreated"
+        },
+        {
+          "method": "GET",
+          "path": "/sudashui/v1/videos/tasks/:task_id",
+          "type": "query",
+          "render": "taskStatus"
+        }
+      ],
+      "protocols": [
+        {
+          "name": "openai_video",
+          "models": [
+            "sdas-mj-minimax-h3-2k",
+            "sdas-xl-sd2.0-903-mini-480p",
+            "sdas-qd-seedance-2.0-fast-480p",
+            "sdas-qd-seedance-2.0-no-face-720p",
+            "sdas-wf-sd2.0-mini-933-480p",
+            "sdas-hn-sd2.0-933-720p",
+            "sdas-hn-sd2.0-pro-933-720p",
+            "sdas-qd-seedance-2.0-480p",
+            "sdas-qd-seedance-2.0-fast-720p",
+            "sdas-qd-seedance-2.0-fast-no-face-720p",
+            "sdas-wf-sd2.0-mini-933-720p",
+            "sdas-hn-sd2.0-fast-720p",
+            "sdas-qd-seedance-2.0-1080p",
+            "sdas-qd-seedance-2.0-fast-no-face-480p",
+            "sdas-pd-sd2.0-mini-903-720p",
+            "sdas-qd-seedance-2.0-mini-no-face-480p",
+            "sdas-qd-seedance-2.0-no-face-1080p",
+            "sdas-xg-sd2.0-pro-933-2-720p",
+            "sdas-qd-seedance-2.0-no-face-4k",
+            "sdas-ll-sd2.5-pro-30s-720p",
+            "sdas-qd-seedance-2.0-4k",
+            "sdas-qd-seedance-2.0-720p",
+            "sdas-qd-seedance-2.0-mini-720p",
+            "sdas-qd-seedance-2.0-mini-480p",
+            "sdas-pd-sd2.0-mini-903-480p",
+            "sdas-qd-seedance-2.0-mini-no-face-720p",
+            "sdas-qd-seedance-2.0-no-face-480p"
+          ]
+        }
+      ]
+    }
+  ]
+}
