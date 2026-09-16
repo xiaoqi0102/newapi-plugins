@@ -1,0 +1,18 @@
+#!/bin/sh
+# pre-commit:提交前自动重算 index.json
+# 用途:防止索引与插件源码不一致 —— 市场安装时前端会按 index.json 里的 sha256 校验,
+#       索引过期的直接后果是「装不上」,而且报错只在前端、后端无日志。
+# 生效方式:git config core.hooksPath .githooks(仓库内已随代码提交,克隆后执行一次即可)
+set -e
+ROOT="$(git rev-parse --show-toplevel)"
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "pre-commit: 未找到 node,跳过 index.json 自动生成" >&2
+  exit 0
+fi
+
+cd "$ROOT"
+node tools/build-index.mjs
+git add index.json
+
+# 顺手校验目录名与 meta 是否一致(build-index.mjs 内部会直接报错退出)

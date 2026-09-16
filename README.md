@@ -71,14 +71,29 @@ index.json                              # 市场索引,由 tools/build-index.mjs
 plugins/tasks/<key>/<version>/plugin.js # 插件本体(市场安装时按 index 里的 path 拉取)
 plugins/tasks/<key>/<version>/README.md # 该插件的上游 / 模型 / 计费 / 建渠道说明
 tools/build-index.mjs                   # 生成 + 校验 index.json
+tools/publish.sh                        # 一键发布:重算索引 → 校验 → 提交 → 推送
+.githooks/pre-commit                    # 提交前自动重算 index.json(防索引过期)
 ```
 
 ## 新增或升级一个插件
 
 1. 把 `plugin.js` 放到 `plugins/tasks/<key>/<version>/`(目录名必须等于 `meta.key` / `meta.version`),同目录补 `README.md`
-2. 跑 `node tools/build-index.mjs` 重新生成 `index.json`
-3. 跑 `node tools/build-index.mjs --check` 确认一致(可挂到 CI)
-4. commit + push
+2. 提交 → **`index.json` 自动重算**,无需手动跑(见下)
+3. `tools/publish.sh "feat(xxx): 1.0.2 ..."` 一条命令完成 重算 → 校验 → 提交 → 推送
+
+### 索引自动生成
+
+`.githooks/pre-commit` 在**每次提交前**自动重跑 `tools/build-index.mjs`,所以 `index.json` 不可能与
+插件源码脱节 —— 这是关键:市场安装时前端会按索引里的 `sha256` 校验,索引过期 = 装不上且后端无日志。
+
+克隆后启用一次(仓库内 hook 不会随 clone 自动生效):
+
+```bash
+git config core.hooksPath .githooks
+```
+
+CI 兜底(GitHub Actions)的等效工作流已备好,见仓库外的 `newapi-plugins-pending-ci/build-index.yml`
+—— 需要给 gh 令牌加 `workflow` 权限(`gh auth refresh -s workflow`)才能推上去。
 
 ## 部署提醒:慢提交上游要放宽回源超时
 
