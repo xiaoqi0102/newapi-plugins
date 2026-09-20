@@ -219,6 +219,56 @@
       ]
     },
     {
+      "key": "meaicc",
+      "name": "MeAICC API",
+      "icon": "text:meaicc",
+      "description": {
+        "en": "MeAICC (api.meaicc.com) Seedance 2.0 video generation, per-call models.",
+        "zh": "MeAICC(api.meaicc.com)Seedance 2.0 视频生成,仅按次计费模型。"
+      },
+      "models": [
+        "sd-2-c1"
+      ],
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugins/tasks/meaicc/1.0.0/plugin.js",
+          "sha256": "455d9b360972432556a887e923908a48e2ec7a48ac68b2867bf3534521e2e613",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "api.meaicc.com"
+          ],
+          "baseUrl": "https://api.meaicc.com"
+        }
+      ],
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/meaicc/v1/videos/generations",
+          "type": "submit",
+          "action": "video",
+          "decode": "decodeVideoSubmit",
+          "render": "taskCreated"
+        },
+        {
+          "method": "GET",
+          "path": "/meaicc/v1/videos/tasks/:task_id",
+          "type": "query",
+          "render": "taskStatus"
+        }
+      ],
+      "protocols": [
+        {
+          "name": "openai_video",
+          "models": [
+            "sd-2-c1"
+          ]
+        }
+      ]
+    },
+    {
       "key": "sudashui",
       "name": "SdAS API",
       "icon": "text:sdas",
