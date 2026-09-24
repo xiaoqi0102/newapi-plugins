@@ -117,12 +117,23 @@
         "happyhorse-1.0-i2v",
         "happyhorse-1.0-r2v"
       ],
-      "latest": "1.0.0",
+      "latest": "1.0.1",
       "versions": [
         {
           "version": "1.0.0",
           "path": "plugins/tasks/gaisc/1.0.0/plugin.js",
           "sha256": "197b5c714a8f2b1b459f3dea6adca8020768bddbb7bffc992736a6361d0c1e5d",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "g-aisc.xyz"
+          ],
+          "baseUrl": "https://g-aisc.xyz"
+        },
+        {
+          "version": "1.0.1",
+          "path": "plugins/tasks/gaisc/1.0.1/plugin.js",
+          "sha256": "1039ed2f2b89e686cff0cc5d498033e4f5df0cc796ec7078c97cdaf1914a6906",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
