@@ -101,6 +101,68 @@
       ]
     },
     {
+      "key": "gaisc",
+      "name": "g-aisc API",
+      "icon": "text:gaisc",
+      "description": {
+        "en": "g-aisc.xyz video generation (Doubao Seedance / MiniMax-H3 / Veo 3.1 / HappyHorse), per-call models.",
+        "zh": "g-aisc.xyz 视频生成(Doubao Seedance / MiniMax-H3 / Veo 3.1 / HappyHorse),仅按次计费模型。"
+      },
+      "models": [
+        "doubao-seedance-2-5-260628",
+        "doubao-seedance-2-0-260128",
+        "MiniMax-H3",
+        "veo-3.1-fast-generate-001",
+        "happyhorse-1.0-t2v",
+        "happyhorse-1.0-i2v",
+        "happyhorse-1.0-r2v"
+      ],
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugins/tasks/gaisc/1.0.0/plugin.js",
+          "sha256": "197b5c714a8f2b1b459f3dea6adca8020768bddbb7bffc992736a6361d0c1e5d",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "g-aisc.xyz"
+          ],
+          "baseUrl": "https://g-aisc.xyz"
+        }
+      ],
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/gaisc/v1/videos/generations",
+          "type": "submit",
+          "action": "video",
+          "decode": "decodeVideoSubmit",
+          "render": "taskCreated"
+        },
+        {
+          "method": "GET",
+          "path": "/gaisc/v1/videos/tasks/:task_id",
+          "type": "query",
+          "render": "taskStatus"
+        }
+      ],
+      "protocols": [
+        {
+          "name": "openai_video",
+          "models": [
+            "doubao-seedance-2-5-260628",
+            "doubao-seedance-2-0-260128",
+            "MiniMax-H3",
+            "veo-3.1-fast-generate-001",
+            "happyhorse-1.0-t2v",
+            "happyhorse-1.0-i2v",
+            "happyhorse-1.0-r2v"
+          ]
+        }
+      ]
+    },
+    {
       "key": "jiasuapi",
       "name": "佳速API",
       "icon": "text:佳速",

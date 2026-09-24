@@ -6,7 +6,8 @@
 
 - 全部插件都是 **任务插件(Task Plugin,渠道类型 61)**,只声明 `openai_video` 协议
 - 全部 **按次计费**(插件内不声明按秒用量钩子,价格配在网关「模型定价」的固定单价里)
-- 素材一律要求 **公网 URL**(上游服务端抓取),base64 / 本地文件会被插件在提交前拦掉
+- 素材形态按上游能力定:多数上游要求 **公网 URL**(上游服务端抓取,base64 / 本地文件被插件拦掉);
+  `gaisc` 例外 —— 它的上游同时支持公网 URL / data URI / 纯 base64
 
 ## 插件一览
 
@@ -16,6 +17,7 @@
 | [`aicost`](plugins/tasks/aicost/1.0.5/README.md) | aicost API | https://www.aicost.me | 1.0.5 | 10 | 按次 |
 | [`sudashui`](plugins/tasks/sudashui/1.0.2/README.md) | SdAS API | https://api.sudashuiapi.com | 1.0.2 | 27 | 按次 |
 | [`meaicc`](plugins/tasks/meaicc/1.0.0/README.md) | MeAICC API | https://api.meaicc.com | 1.0.0 | 1 | 按次 |
+| [`gaisc`](plugins/tasks/gaisc/1.0.0/README.md) | g-aisc API | https://g-aisc.xyz | 1.0.0 | 7 | 按次 |
 
 声明模型数 ≥ 渠道实际挂载数:插件只声明"上游明确支持"的模型,每个渠道按自己的 Key 勾选子集。
 
