@@ -11,13 +11,9 @@
         "zh": "aicost.me 中转:Seedance / MiniMax H3 视频,仅按次计费模型(纯视频)。"
       },
       "models": [
-        "seedance2.0-900-3",
-        "seedance2.5-vid",
-        "seedance2.0-480p",
-        "seedance2.0-720p",
-        "seedance2.5-900"
+        "seedance2.0-900-fast"
       ],
-      "latest": "1.0.6",
+      "latest": "1.0.7",
       "versions": [
         {
           "version": "1.0.5",
@@ -42,17 +38,25 @@
             "aicost.me"
           ],
           "baseUrl": "https://www.aicost.me"
+        },
+        {
+          "version": "1.0.7",
+          "path": "plugins/tasks/aicost/1.0.7/plugin.js",
+          "sha256": "adc0751b7dc8bbf767f589b78801126f6ce8a6c7e94978bef78534a49c0c0f67",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "www.aicost.me",
+            "aicost.me"
+          ],
+          "baseUrl": "https://www.aicost.me"
         }
       ],
       "protocols": [
         {
           "name": "openai_video",
           "models": [
-            "seedance2.0-900-3",
-            "seedance2.5-vid",
-            "seedance2.0-480p",
-            "seedance2.0-720p",
-            "seedance2.5-900"
+            "seedance2.0-900-fast"
           ]
         }
       ]
