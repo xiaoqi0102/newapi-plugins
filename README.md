@@ -13,7 +13,7 @@
 
 | 插件 key | 名称 | 上游 | 版本 | 声明模型 | 计费 |
 |---|---|---|---|---|---|
-| [`jiasuapi`](plugins/tasks/jiasuapi/1.0.8/README.md) | 佳速API | https://ai.jiasuapi.com | 1.0.8 | 18 | 按次 |
+| [`jiasuapi`](plugins/tasks/jiasuapi/1.0.9/README.md) | 佳速API | https://ai.jiasuapi.com | 1.0.9 | 13 | 按次 |
 | [`aicost`](plugins/tasks/aicost/1.0.5/README.md) | aicost API | https://www.aicost.me | 1.0.5 | 10 | 按次 |
 | [`sudashui`](plugins/tasks/sudashui/1.0.2/README.md) | SdAS API | https://api.sudashuiapi.com | 1.0.2 | 27 | 按次 |
 | [`meaicc`](plugins/tasks/meaicc/1.0.0/README.md) | MeAICC API | https://api.meaicc.com | 1.0.0 | 1 | 按次 |
