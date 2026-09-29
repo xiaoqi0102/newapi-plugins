@@ -7,22 +7,17 @@
       "name": "aicost API",
       "icon": "text:aicost",
       "description": {
-        "en": "aicost.me relay: Seedance / MiniMax H3 video and GPT-Image / Gemini image, per-call models only.",
-        "zh": "aicost.me 中转:Seedance / MiniMax H3 视频与 GPT-Image / Gemini 图片,仅按次计费模型。"
+        "en": "aicost.me relay: Seedance / MiniMax H3 video, per-call models only (video only).",
+        "zh": "aicost.me 中转:Seedance / MiniMax H3 视频,仅按次计费模型(纯视频)。"
       },
       "models": [
-        "gpt-image-2",
-        "gpt-image-2.5-flare",
-        "gpt-image-2.5-sunburst",
-        "gemini-3-pro-image-preview",
-        "gemini-3.1-flash-image-preview",
         "seedance2.0-900-3",
         "seedance2.5-vid",
         "seedance2.0-480p",
         "seedance2.0-720p",
         "seedance2.5-900"
       ],
-      "latest": "1.0.5",
+      "latest": "1.0.6",
       "versions": [
         {
           "version": "1.0.5",
@@ -35,56 +30,18 @@
             "aicost.me"
           ],
           "baseUrl": "https://www.aicost.me"
-        }
-      ],
-      "routes": [
-        {
-          "method": "POST",
-          "path": "/aicost/v1/images/generations",
-          "type": "submit",
-          "action": "image",
-          "decode": "decodeImageSubmit",
-          "render": "imageResult",
-          "models": [
-            "gpt-image-2",
-            "gpt-image-2.5-flare",
-            "gpt-image-2.5-sunburst",
-            "gemini-3-pro-image-preview",
-            "gemini-3.1-flash-image-preview"
-          ]
         },
         {
-          "method": "POST",
-          "path": "/aicost/v1/images/edits",
-          "type": "submit",
-          "action": "image",
-          "decode": "decodeImageEditSubmit",
-          "render": "imageResult",
-          "models": [
-            "gpt-image-2",
-            "gpt-image-2.5-flare",
-            "gpt-image-2.5-sunburst",
-            "gemini-3-pro-image-preview",
-            "gemini-3.1-flash-image-preview"
-          ]
-        },
-        {
-          "method": "POST",
-          "path": "/aicost/v1/gemini-images",
-          "type": "submit",
-          "action": "image",
-          "decode": "decodeGeminiImageSubmit",
-          "render": "imageResult",
-          "models": [
-            "gemini-3-pro-image-preview",
-            "gemini-3.1-flash-image-preview"
-          ]
-        },
-        {
-          "method": "GET",
-          "path": "/aicost/v1/images/tasks/:task_id",
-          "type": "query",
-          "render": "imageTaskStatus"
+          "version": "1.0.6",
+          "path": "plugins/tasks/aicost/1.0.6/plugin.js",
+          "sha256": "a2a7f1ec0a2ec1250654d1526bb38d0eea523d753818802430b7ea79c4e6bc92",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "www.aicost.me",
+            "aicost.me"
+          ],
+          "baseUrl": "https://www.aicost.me"
         }
       ],
       "protocols": [
@@ -178,13 +135,10 @@
       "name": "佳速API",
       "icon": "text:佳速",
       "description": {
-        "en": "JiasuAPI image & video media platform. Official site: https://ai.jiasuapi.com/",
-        "zh": "佳速API中转平台（图片、视频中转平台）。官方地址：https://ai.jiasuapi.com/"
+        "en": "JiasuAPI video media platform (video only). Official site: https://ai.jiasuapi.com/",
+        "zh": "佳速API中转平台（纯视频）。官方地址：https://ai.jiasuapi.com/"
       },
       "models": [
-        "gpt-image-2.5-1k",
-        "gpt-image-2.5-sunburst-1k",
-        "jimeng-5.0",
         "sd-2.0-720",
         "sd-2.0-720-fast",
         "sd-2.0-933-720-fast-原生真人",
@@ -196,7 +150,7 @@
         "seedance-2.5-900",
         "seedance2.0-mini-A"
       ],
-      "latest": "1.0.9",
+      "latest": "1.0.10",
       "versions": [
         {
           "version": "1.0.7",
@@ -242,6 +196,21 @@
             "m.jiasuapi.com",
             "media.jiasuapi.com"
           ]
+        },
+        {
+          "version": "1.0.10",
+          "path": "plugins/tasks/jiasuapi/1.0.10/plugin.js",
+          "sha256": "a6ac9c5a3d9cb2dbb92ff910b0984a206e6be0e72511fe8ba92f2f54b3a95d2c",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "ai.jiasuapi.com",
+            "ai1.jiasuapi.com",
+            "api.jiasuapi.com",
+            "relay.jiasuapi.com",
+            "m.jiasuapi.com",
+            "media.jiasuapi.com"
+          ]
         }
       ],
       "routes": [
@@ -266,27 +235,8 @@
           ]
         },
         {
-          "method": "POST",
-          "path": "/jiasuapi/v1/images/create",
-          "type": "submit",
-          "action": "image",
-          "decode": "decodeImageSubmit",
-          "render": "taskCreatedJsapi",
-          "models": [
-            "gpt-image-2.5-1k",
-            "gpt-image-2.5-sunburst-1k",
-            "jimeng-5.0"
-          ]
-        },
-        {
           "method": "GET",
           "path": "/jiasuapi/v1/videos/tasks/:task_id",
-          "type": "query",
-          "render": "taskStatusJsapi"
-        },
-        {
-          "method": "GET",
-          "path": "/jiasuapi/v1/images/tasks/:task_id",
           "type": "query",
           "render": "taskStatusJsapi"
         }

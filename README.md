@@ -5,6 +5,7 @@
 组织,**一个插件一个子目录**,既可作为市场源一键安装,也可单独下载 `plugin.js` 手动上传。
 
 - 全部插件都是 **任务插件(Task Plugin,渠道类型 61)**,只声明 `openai_video` 协议
+- 全部插件**只做视频**(图片功能已从各插件中移除;图片面走普通渠道,不走任务插件)
 - 全部 **按次计费**(插件内不声明按秒用量钩子,价格配在网关「模型定价」的固定单价里)
 - 素材形态按上游能力定:多数上游要求 **公网 URL**(上游服务端抓取,base64 / 本地文件被插件拦掉);
   `gaisc` 例外 —— 它的上游同时支持公网 URL / data URI / 纯 base64
@@ -13,8 +14,8 @@
 
 | 插件 key | 名称 | 上游 | 版本 | 声明模型 | 计费 |
 |---|---|---|---|---|---|
-| [`jiasuapi`](plugins/tasks/jiasuapi/1.0.9/README.md) | 佳速API | https://ai.jiasuapi.com | 1.0.9 | 13 | 按次 |
-| [`aicost`](plugins/tasks/aicost/1.0.5/README.md) | aicost API | https://www.aicost.me | 1.0.5 | 10 | 按次 |
+| [`jiasuapi`](plugins/tasks/jiasuapi/1.0.10/README.md) | 佳速API | https://ai.jiasuapi.com | 1.0.10 | 10 | 按次 |
+| [`aicost`](plugins/tasks/aicost/1.0.6/README.md) | aicost API | https://www.aicost.me | 1.0.6 | 5 | 按次 |
 | [`sudashui`](plugins/tasks/sudashui/1.0.2/README.md) | SdAS API | https://api.sudashuiapi.com | 1.0.2 | 27 | 按次 |
 | [`meaicc`](plugins/tasks/meaicc/1.0.0/README.md) | MeAICC API | https://api.meaicc.com | 1.0.0 | 1 | 按次 |
 | [`gaisc`](plugins/tasks/gaisc/1.0.1/README.md) | g-aisc API | https://g-aisc.xyz | 1.0.1 | 7 | 按次 |
