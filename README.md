@@ -16,7 +16,7 @@
 |---|---|---|---|---|---|
 | [`jiasuapi`](plugins/tasks/jiasuapi/1.0.10/README.md) | 佳速API | https://ai.jiasuapi.com | 1.0.10 | 10 | 按次 |
 | [`aicost`](plugins/tasks/aicost/1.0.7/README.md) | aicost API | https://www.aicost.me | 1.0.7 | 1 | 按次 |
-| [`sudashui`](plugins/tasks/sudashui/1.0.2/README.md) | SdAS API | https://api.sudashuiapi.com | 1.0.2 | 27 | 按次 |
+| [`sudashui`](plugins/tasks/sudashui/1.0.3/README.md) | SdAS API | https://api.sudashuiapi.com | 1.0.3 | 23 | 按次 |
 | [`meaicc`](plugins/tasks/meaicc/1.0.0/README.md) | MeAICC API | https://api.meaicc.com | 1.0.0 | 1 | 按次 |
 | [`gaisc`](plugins/tasks/gaisc/1.0.1/README.md) | g-aisc API | https://g-aisc.xyz | 1.0.1 | 7 | 按次 |
 
@@ -54,7 +54,7 @@ https://raw.githubusercontent.com/xiaoqi0102/newapi-plugins/main/index.json
 # 1. 上传插件源码(自动编译校验)
 python3 - <<'PY'
 import json, urllib.request, os
-src = open('plugins/tasks/sudashui/1.0.2/plugin.js', encoding='utf-8').read()
+src = open('plugins/tasks/sudashui/1.0.3/plugin.js', encoding='utf-8').read()
 body = json.dumps({"source": src, "enabled": True}, ensure_ascii=False).encode()
 req = urllib.request.Request(os.environ['GW'] + '/api/plugin/task', data=body, method='PUT',
     headers={'Authorization': 'Bearer ' + os.environ['GW_TOKEN'], 'New-Api-User': '1',
@@ -65,7 +65,7 @@ PY
 # 2. 激活版本
 curl -sS -X POST "$GW/api/plugin/task/sudashui/activate" \
   -H "Authorization: Bearer $GW_TOKEN" -H 'New-Api-User: 1' \
-  -H 'Content-Type: application/json' -d '{"version":"1.0.2"}'
+  -H 'Content-Type: application/json' -d '{"version":"1.0.3"}'
 ```
 
 ## 目录结构

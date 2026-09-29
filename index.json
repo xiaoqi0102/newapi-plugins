@@ -323,16 +323,13 @@
       },
       "models": [
         "sdas-mj-minimax-h3-2k",
-        "sdas-xl-sd2.0-903-mini-480p",
         "sdas-qd-seedance-2.0-fast-480p",
         "sdas-qd-seedance-2.0-no-face-720p",
-        "sdas-wf-sd2.0-mini-933-480p",
         "sdas-hn-sd2.0-933-720p",
         "sdas-hn-sd2.0-pro-933-720p",
         "sdas-qd-seedance-2.0-480p",
         "sdas-qd-seedance-2.0-fast-720p",
         "sdas-qd-seedance-2.0-fast-no-face-720p",
-        "sdas-wf-sd2.0-mini-933-720p",
         "sdas-hn-sd2.0-fast-720p",
         "sdas-qd-seedance-2.0-1080p",
         "sdas-qd-seedance-2.0-fast-no-face-480p",
@@ -345,12 +342,11 @@
         "sdas-qd-seedance-2.0-4k",
         "sdas-qd-seedance-2.0-720p",
         "sdas-qd-seedance-2.0-mini-720p",
-        "sdas-qd-seedance-2.0-mini-480p",
         "sdas-pd-sd2.0-mini-903-480p",
         "sdas-qd-seedance-2.0-mini-no-face-720p",
         "sdas-qd-seedance-2.0-no-face-480p"
       ],
-      "latest": "1.0.2",
+      "latest": "1.0.3",
       "versions": [
         {
           "version": "1.0.1",
@@ -369,6 +365,19 @@
           "version": "1.0.2",
           "path": "plugins/tasks/sudashui/1.0.2/plugin.js",
           "sha256": "39552d4498d611f0d2aa90599d3e8ecfce6031ce2a8fd16a840c9940eea03927",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "api.sudashuiapi.com",
+            "files.sudashuiapi.com",
+            "www.sudashuiapi.com"
+          ],
+          "baseUrl": "https://api.sudashuiapi.com"
+        },
+        {
+          "version": "1.0.3",
+          "path": "plugins/tasks/sudashui/1.0.3/plugin.js",
+          "sha256": "790245a77f977c08917f3a31eebbdbc4b28408665f12afa08b5d66608289ef49",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -400,16 +409,13 @@
           "name": "openai_video",
           "models": [
             "sdas-mj-minimax-h3-2k",
-            "sdas-xl-sd2.0-903-mini-480p",
             "sdas-qd-seedance-2.0-fast-480p",
             "sdas-qd-seedance-2.0-no-face-720p",
-            "sdas-wf-sd2.0-mini-933-480p",
             "sdas-hn-sd2.0-933-720p",
             "sdas-hn-sd2.0-pro-933-720p",
             "sdas-qd-seedance-2.0-480p",
             "sdas-qd-seedance-2.0-fast-720p",
             "sdas-qd-seedance-2.0-fast-no-face-720p",
-            "sdas-wf-sd2.0-mini-933-720p",
             "sdas-hn-sd2.0-fast-720p",
             "sdas-qd-seedance-2.0-1080p",
             "sdas-qd-seedance-2.0-fast-no-face-480p",
@@ -422,7 +428,6 @@
             "sdas-qd-seedance-2.0-4k",
             "sdas-qd-seedance-2.0-720p",
             "sdas-qd-seedance-2.0-mini-720p",
-            "sdas-qd-seedance-2.0-mini-480p",
             "sdas-pd-sd2.0-mini-903-480p",
             "sdas-qd-seedance-2.0-mini-no-face-720p",
             "sdas-qd-seedance-2.0-no-face-480p"
