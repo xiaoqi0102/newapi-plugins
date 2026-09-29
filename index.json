@@ -198,14 +198,30 @@
         "seedance-2.0-933-不重试",
         "seedance-2.5-900-不重试",
         "seedance-2.5-101010-不重试",
-        "seedance-2.5-301010-不重试"
+        "seedance-2.5-301010-不重试",
+        "seedance2.0-mini-A"
       ],
-      "latest": "1.0.7",
+      "latest": "1.0.8",
       "versions": [
         {
           "version": "1.0.7",
           "path": "plugins/tasks/jiasuapi/1.0.7/plugin.js",
           "sha256": "c66cdfc759404494ed6f263f8c72772c3df01f802585cdee216a6d7cabee2e88",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "ai.jiasuapi.com",
+            "ai1.jiasuapi.com",
+            "api.jiasuapi.com",
+            "relay.jiasuapi.com",
+            "m.jiasuapi.com",
+            "media.jiasuapi.com"
+          ]
+        },
+        {
+          "version": "1.0.8",
+          "path": "plugins/tasks/jiasuapi/1.0.8/plugin.js",
+          "sha256": "2e570b66a5d967e771ad4f6247c4236d5adfefa7cbd71665f7b669be53639e33",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -240,7 +256,8 @@
             "seedance-2.0-933-不重试",
             "seedance-2.5-900-不重试",
             "seedance-2.5-101010-不重试",
-            "seedance-2.5-301010-不重试"
+            "seedance-2.5-301010-不重试",
+            "seedance2.0-mini-A"
           ]
         },
         {
@@ -286,7 +303,8 @@
             "seedance-2.0-933-不重试",
             "seedance-2.5-900-不重试",
             "seedance-2.5-101010-不重试",
-            "seedance-2.5-301010-不重试"
+            "seedance-2.5-301010-不重试",
+            "seedance2.0-mini-A"
           ]
         }
       ]
