@@ -6,7 +6,7 @@
 - 协议:`openai_video`(下游标准 `/v1/videos`)
 - 计费:**按次**。插件不声明按秒用量钩子,单价配在网关「模型定价」的固定单价里
 - 上游地址:https://ai.jiasuapi.com (允许域:ai / ai1 / api / relay / m / media `.jiasuapi.com`)
-- 声明模型:**11 个视频模型**(1.0.11 新增 `minimax-h3`;图片功能已于 1.0.10 全部移除)
+- 声明模型:**7 个** —— 1.0.11 起与站点在售清单对齐(图片功能已于 1.0.10 全部移除)
 
 ## 路径
 
@@ -18,7 +18,7 @@
 | 插件自有 | POST | `/jiasuapi/v1/videos/generations` | 视频创建(调试用) |
 | 插件自有 | GET | `/jiasuapi/v1/videos/tasks/{task_id}` | 视频查询(调试用) |
 
-上游侧走的是站点文档的 `POST /v1/video/generations` + `GET /v1/videos/tasks/{task_id}`(返回扁平结构,无 `code/data` 外层)。
+上游侧走站点文档的 `POST /v1/video/generations` + `GET /v1/videos/tasks/{task_id}`(扁平结构,无 `code/data` 外层)。
 
 ## 建渠道
 
@@ -26,33 +26,40 @@
 2. **绑定插件** `jiasuapi`
 3. **Base URL 可留空**(插件默认 `https://ai.jiasuapi.com`,也允许填 ai1/api/relay/m/media 域名)
 4. **密钥**:佳速的 Bearer API Key(`sk-…`)
-5. **模型**:按 Key 实际可用的勾选(插件已声明 11 个视频模型)
+5. **模型**:按下表勾选(插件已声明 7 个)
 
 > ⚠️ 任务插件的模型名**必须在插件的 `meta` 里声明过**(`models` + `protocols[].models` + `routes[].models` + 内部 `VIDEO_MODELS`)。
 > 上游新上架、而插件没声明的模型名,光在渠道里勾选也没用,调用会直接 `503 No available channel`。
 
-## 模型与参考单价
+### ⚠️ `minimax-h3` 为什么要写成 `minimax-h3-jiasu`
 
-单价为本仓库维护时所用网关的「模型定价」固定单价(按次);上游价目表见
-`https://ai.jiasuapi.com/api/pricing`(单位与本站 `ModelPrice` 同为**美元/次**,1:1 照抄)。
+New API 对**插件声明的模型名做全平台唯一校验(大小写不敏感)**,而 `minimax-h3` 已被
+g-aisc 插件的 `MiniMax-H3` 占用(安装时报 `plugin jiasuapi model "minimax-h3" conflicts with plugin gaisc model "MiniMax-H3"`)。
+所以本站点用**站点专属别名** `minimax-h3-jiasu` 声明,提交上游前由插件内的 `MODEL_ALIASES`
+翻回真名 `minimax-h3`。
 
-| 模型 | 单价 | 备注 |
-|---|---|---|
-| `seedance-2.0-900` | $0.70 | 视频 |
-| `seedance-2.5-900` | $0.80 | 视频 |
-| `seedance2.0-mini-A` | $1.00 | 视频 |
-| `minimax-h3` | $1.00 | 视频,**2K 固定**、参考视频/音频(1.0.11 新增) |
-| `seedance-2.0-933` | $1.30 | 视频 |
-| `seedance-2.5-101010` | $1.80 | 视频 |
-| `seedance-2.5-301010` | $2.00 | 视频 |
-| `sd-2.0-933-720-fast-原生真人` | $2.60 | 视频,**原生真人脸** |
-| `sd-2.0-933-720-满血原生真人` | $5.50 | 视频,**原生真人脸** |
+渠道侧照旧用「别名-价格」写法:`minimax-h3-jiasu-1`(client 看到的名字)→ `model_mapping`
+指到声明的 `minimax-h3-jiasu` → 插件出站时再翻成 `minimax-h3`。**client 看到的名字由渠道决定,不受影响。**
 
-已声明但本机未挂渠道:`sd-2.0-720`、`sd-2.0-720-fast`。
+## 模型与参考单价(站点在售清单)
 
-上游还有但**本仓库未声明**的:`seedance2.0-720-满血真人`($5.50,疑似 `sd-2.0-933-720-满血原生真人`
-的改名版)、`seedance2.5-全参真人`($1.10,**按量计费 quota_type=2**,不进按次渠道)、
-以及 9 个 `gpt-image-2*` 图片模型(本插件为纯视频,不声明)。
+单价口径:**站点 `/api/pricing` 的展示价(元/次)**,渠道别名里「短名-价格」的 `-价格` 部分照抄。
+
+| 声明模型名 | 站点原名 | 单价 | 计费 | 备注 |
+|---|---|---|---|---|
+| `seedance-2.0-900` | seedance-2.0-900 | ¥0.7/次 | 按次 | 4-15s、480p/720p、最多 9 图、后台过人脸 |
+| `seedance-2.5-900` | seedance-2.5-900 | ¥0.8/次 | 按次 | 4-30s、480p/720p、最多 9 图 |
+| `seedance-2.5-101010` | seedance-2.5-101010 | ¥1.8/次 | 按次 | 4-30s、720p、最多 10 图 10 音频、不参考视频 |
+| `seedance-2.5-301010` | seedance-2.5-301010 | ¥2/次 | **站点标「按量计费」** | 4-30s、480p/720p、最多 30 图 10 音频 |
+| `sd-2.0-933-720-fast-原生真人` | 同左 | ¥2.6/次 | 按次 | 4-15s、720p、9 图 3 视频 3 音频、原生真人 |
+| `dola-sd-2.0-933` | dola-sd-2.0-933 | ¥1.3/次 | 按次 | dola 后台过真人,9 图 3 音频 |
+| `minimax-h3-jiasu` | **minimax-h3** | ¥1/次 | 按次 | **2K 固定**、9 图 3 视频 3 音频、原生过真人 |
+
+> `seedance-2.5-301010` 站点标的是**按量计费**,而本插件是**按次**计费 —— 上架前请自行确认
+> 该模型的真实扣费口径,必要时用网关「模型定价」单独给它配单价,或先不上架。
+
+1.0.11 **下线声明**的模型(站点已不在售清单里):`sd-2.0-720`、`sd-2.0-720-fast`、
+`sd-2.0-933-720-满血原生真人`、`seedance-2.0-933`、`seedance2.0-mini-A`。
 
 ## minimax-h3 专用规格(1.0.11)
 
@@ -70,9 +77,6 @@
 | `materials` | 混合写法 `[{type, url, duration_seconds?}]`(type=image/video/audio) | 原样透传 |
 | `attachments` | 混合写法 `[{type, url, mime?, duration_seconds?}]` | **与 images/videos/audios/materials 互斥**,同时传本地报错 |
 
-> `attachments` 与 `images/videos/audios/materials` 上游规定不能同时使用。插件在提交前直接拦掉,
-> 避免拿到「参数没错但素材没生效」的结果。
-
 ## 实现要点
 
 - 下游字段:`images` / `videos` / `audios`(顶层),`ratio` 优先、`aspect_ratio` 兜底,
@@ -81,6 +85,7 @@
 - 上游**没有** `generate_audio` 字段,不转发该参数
 - `face` 只透传 `{enabled, mode: light|heavy}`,其它键忽略
 - 参考视频/音频对象的 `duration_seconds` / `mime` 会原样带上(1.0.11 起;此前会被丢掉)
+- `MODEL_ALIASES` 只做「插件声明名 → 上游真名」的翻译,目前只有 `minimax-h3-jiasu → minimax-h3` 一条
 - 上游受理较轻(实测 3~12 秒),一般不会踩回源超时
 - 上游模型按**分组隔离**:外部用不带 prompt 的探针**无法判断**某个模型是否已下架
   (探针返回 `503 No available channel` 只说明「当前这把 Key 的分组里没挂到」),要验证只能真跑一次
@@ -89,8 +94,8 @@
 
 | 版本 | 说明 |
 |---|---|
-| 1.0.11 | 对齐站点新版《接口文档》视频面:新增 **`minimax-h3`** 声明(四处同步);minimax-h3 专用规格(时长 4~15 默认 15、分辨率固定 2k、比例白名单、图 ≤9 / 参考视频 ≤3 / 音频 ≤3);参考视频/音频对象保留 `duration_seconds` 与 `mime`;新增 `attachments` 混合字段并与 images/videos/audios/materials 互斥。 |
-| 1.0.10 | **纯视频化**:删除全部图片功能 —— 3 个图片模型、`/jiasuapi/v1/images/create` 与 `/jiasuapi/v1/images/tasks/:id` 两条路由、`IMAGE_MODELS` / `isImageModel` / `inferAction` / `decodeImageSubmit` / `buildImageBody` / `artifactIsImage` / `QUALITIES` / `outboundQuality`,以及查询路径与产物下载里的图片分支。视频链路完全保留。 |
-| 1.0.9 | 移除 5 个 `-不重试` 变体声明(`seedance-2.0-900` / `-2.0-933` / `-2.5-900` / `-2.5-101010` / `-2.5-301010`) |
-| 1.0.8 | 补声明上游新增 `seedance2.0-mini-A`($1.00/次);同步上游 2026-09-28 起的价目口径 |
+| 1.0.11 | 与站点在售清单对齐:声明收敛为 **7 个**模型(下线 `sd-2.0-720` / `sd-2.0-720-fast` / `sd-2.0-933-720-满血原生真人` / `seedance-2.0-933` / `seedance2.0-mini-A`),新增 `dola-sd-2.0-933`;新增 **minimax-h3**(因平台模型名唯一限制,以别名 `minimax-h3-jiasu` 声明 + `MODEL_ALIASES` 翻回真名);minimax-h3 专用规格(4~15s 默认 15、分辨率固定 2k、比例白名单、图 ≤9 / 视频 ≤3 / 音频 ≤3);参考视频/音频保留 `duration_seconds` 与 `mime`;新增 `attachments` 混合字段并与 images/videos/audios/materials 互斥。 |
+| 1.0.10 | **纯视频化**:删除全部图片功能(3 个图片模型、`/jiasuapi/v1/images/create` 与 `/jiasuapi/v1/images/tasks/:id` 两条路由、`IMAGE_MODELS` / `isImageModel` / `inferAction` / `decodeImageSubmit` / `buildImageBody` / `artifactIsImage` / `QUALITIES` / `outboundQuality`,以及查询路径与产物下载里的图片分支)。视频链路完全保留。 |
+| 1.0.9 | 移除 5 个 `-不重试` 变体声明 |
+| 1.0.8 | 补声明上游新增 `seedance2.0-mini-A`;同步上游 2026-09-28 起的价目口径 |
 | 1.0.7 | 声明 5 个 `-不重试` 变体(已于 1.0.9 移除) |

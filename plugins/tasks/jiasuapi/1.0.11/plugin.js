@@ -7,8 +7,12 @@
  * Base URL and API key come from the Task Plugin channel (ctx.baseUrl / ctx.apiKey).
  *
  * 变更记录:
- *   1.0.11 对齐站点新版《接口文档》的视频面:
- *          · 新增 minimax-h3(MiniMax H3)模型声明(meta.models / protocols / routes / VIDEO_MODELS 四处)
+ *   1.0.11 对齐站点新版《接口文档》与站点在售模型清单:
+ *          · 声明模型收敛为站点在售的 7 个:seedance-2.0-900 / 2.5-900 / 2.5-101010 / 2.5-301010 /
+ *            sd-2.0-933-720-fast-原生真人 / dola-sd-2.0-933 / minimax-h3-jiasu
+ *            (下线声明:sd-2.0-720、sd-2.0-720-fast、sd-2.0-933-720-满血原生真人、seedance-2.0-933、seedance2.0-mini-A)
+ *          · 新增 minimax-h3(上游真名),因平台「插件声明模型名全平台唯一(大小写不敏感)」限制,
+ *            plugin 侧改用别名 minimax-h3-jiasu 声明,提交前由 MODEL_ALIASES 翻回 minimax-h3
  *          · minimax-h3 专用规格:时长 4~15(不传或越界按 15)、分辨率固定 2k、比例仅 9:16/1:1/3:4/4:3/16:9(越界按 16:9);
  *            参考图 ≤9、参考视频 ≤3、参考音频 ≤3(超限本地报中文错)
  *          · 参考视频/音频对象保留 duration_seconds 与 mime(文档:videos[].duration_seconds 不传按 5 秒计);
@@ -29,22 +33,18 @@ export const meta = {
   icon: "text:佳速",
   description: {
     en: "JiasuAPI video media platform (video only). Official site: https://ai.jiasuapi.com/",
-    zh: "佳速API中转平台（纯视频）。官方地址：https://ai.jiasuapi.com/",
+    zh: "佳速API中转平台（纯视频，含 minimax-h3 视频）。官方地址：https://ai.jiasuapi.com/",
   },
   version: "1.0.11",
   author: { name: "佳速API", url: "https://ai.jiasuapi.com/" },
   models: [
-    "sd-2.0-720",
-    "sd-2.0-720-fast",
-    "sd-2.0-933-720-fast-原生真人",
-    "sd-2.0-933-720-满血原生真人",
     "seedance-2.0-900",
-    "seedance-2.0-933",
+    "seedance-2.5-900",
     "seedance-2.5-101010",
     "seedance-2.5-301010",
-    "seedance-2.5-900",
-    "seedance2.0-mini-A",
-    "minimax-h3",
+    "sd-2.0-933-720-fast-原生真人",
+    "dola-sd-2.0-933",
+    "minimax-h3-jiasu",
   ],
   fetchMode: "per_task",
   allowedHosts: [
@@ -59,17 +59,13 @@ export const meta = {
     {
       name: "openai_video",
       models: [
-        "sd-2.0-720",
-        "sd-2.0-720-fast",
-        "sd-2.0-933-720-fast-原生真人",
-        "sd-2.0-933-720-满血原生真人",
         "seedance-2.0-900",
-        "seedance-2.0-933",
+        "seedance-2.5-900",
         "seedance-2.5-101010",
         "seedance-2.5-301010",
-        "seedance-2.5-900",
-        "seedance2.0-mini-A",
-        "minimax-h3",
+        "sd-2.0-933-720-fast-原生真人",
+        "dola-sd-2.0-933",
+        "minimax-h3-jiasu",
       ],
     },
   ],
@@ -82,17 +78,13 @@ export const meta = {
       decode: "decodeVideoSubmit",
       render: "taskCreatedJsapi",
       models: [
-        "sd-2.0-720",
-        "sd-2.0-720-fast",
-        "sd-2.0-933-720-fast-原生真人",
-        "sd-2.0-933-720-满血原生真人",
         "seedance-2.0-900",
-        "seedance-2.0-933",
+        "seedance-2.5-900",
         "seedance-2.5-101010",
         "seedance-2.5-301010",
-        "seedance-2.5-900",
-        "seedance2.0-mini-A",
-        "minimax-h3",
+        "sd-2.0-933-720-fast-原生真人",
+        "dola-sd-2.0-933",
+        "minimax-h3-jiasu",
       ],
     },
     {
@@ -106,18 +98,32 @@ export const meta = {
 
 const DEFAULT_BASE_URL = "https://ai.jiasuapi.com";
 
+/**
+ * 模型别名 → 上游真名。
+ *
+ * New API 对「插件声明的模型名」做**全平台唯一校验(大小写不敏感)**,所以站点自己的
+ * `minimax-h3` 不能直接声明(g-aisc 插件已占用 MiniMax-H3)。这里声明成站点专属别名
+ * `minimax-h3-jiasu`,提交前再翻回上游真名 `minimax-h3`。
+ * 渠道侧照旧用「别名-价格」写法(client 看到的名字),model_mapping 指到本插件的声明名。
+ */
+const MODEL_ALIASES = {
+  "minimax-h3-jiasu": "minimax-h3",
+};
+
+/** 声明名 → 上游真名(没有别名就原样) */
+function upstreamModelName(name) {
+  const key = trimmed(name);
+  return MODEL_ALIASES[key] || key;
+}
+
 const VIDEO_MODELS = {
-  "sd-2.0-720": true,
-  "sd-2.0-720-fast": true,
-  "sd-2.0-933-720-fast-原生真人": true,
-  "sd-2.0-933-720-满血原生真人": true,
   "seedance-2.0-900": true,
-  "seedance-2.0-933": true,
+  "seedance-2.5-900": true,
   "seedance-2.5-101010": true,
   "seedance-2.5-301010": true,
-  "seedance-2.5-900": true,
-  "seedance2.0-mini-A": true,
-  "minimax-h3": true,
+  "sd-2.0-933-720-fast-原生真人": true,
+  "dola-sd-2.0-933": true,
+  "minimax-h3-jiasu": true,
 };
 
 function trimmed(value) {
@@ -157,7 +163,7 @@ function authHeaders(apiKey) {
 
 function isVideoModel(model) {
   const m = trimmed(model);
-  return Boolean(VIDEO_MODELS[m]) || /^seedance-/i.test(m) || /^sd-2\./i.test(m) || /^minimax-/i.test(m);
+  return Boolean(VIDEO_MODELS[m]) || /^seedance-/i.test(m) || /^sd-2\./i.test(m) || /^dola-/i.test(m) || /^minimax-/i.test(m);
 }
 
 function decodeJsonObject(ctx) {
@@ -382,8 +388,9 @@ export const native = {
 };
 
 function buildVideoBody(ctx, req) {
-  const model = ctx.upstreamModel || ctx.model || req.model || "";
-  if (!trimmed(model)) throw new Error("model is required");
+  const declared = ctx.upstreamModel || ctx.model || req.model || "";
+  if (!trimmed(declared)) throw new Error("model is required");
+  const model = upstreamModelName(declared);
   const prompt = clientPrompt(req);
   if (!prompt) throw new Error("prompt is required");
 
@@ -450,7 +457,7 @@ function buildVideoBody(ctx, req) {
   const face = normalizeFace(req.face) || normalizeFace(metadata.face);
   if (face) body.face = face;
 
-  if (trimmed(body.model) === MINIMAX_H3.model) applyMinimaxH3(body);
+  if (upstreamModelName(body.model) === MINIMAX_H3.model) applyMinimaxH3(body);
 
   return body;
 }

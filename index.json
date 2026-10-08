@@ -72,13 +72,13 @@
       "models": [
         "doubao-seedance-2-5-260628",
         "doubao-seedance-2-0-260128",
-        "MiniMax-H3",
+        "MiniMax-H3-gaisc",
         "veo-3.1-fast-generate-001",
         "happyhorse-1.0-t2v",
         "happyhorse-1.0-i2v",
         "happyhorse-1.0-r2v"
       ],
-      "latest": "1.0.1",
+      "latest": "1.0.2",
       "versions": [
         {
           "version": "1.0.0",
@@ -95,6 +95,17 @@
           "version": "1.0.1",
           "path": "plugins/tasks/gaisc/1.0.1/plugin.js",
           "sha256": "1039ed2f2b89e686cff0cc5d498033e4f5df0cc796ec7078c97cdaf1914a6906",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "g-aisc.xyz"
+          ],
+          "baseUrl": "https://g-aisc.xyz"
+        },
+        {
+          "version": "1.0.2",
+          "path": "plugins/tasks/gaisc/1.0.2/plugin.js",
+          "sha256": "a43e4cdd38f4293f70b7e42bfa9ede5c76168f75bd88995015bba5fb761de39e",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -125,7 +136,7 @@
           "models": [
             "doubao-seedance-2-5-260628",
             "doubao-seedance-2-0-260128",
-            "MiniMax-H3",
+            "MiniMax-H3-gaisc",
             "veo-3.1-fast-generate-001",
             "happyhorse-1.0-t2v",
             "happyhorse-1.0-i2v",
@@ -140,20 +151,16 @@
       "icon": "text:佳速",
       "description": {
         "en": "JiasuAPI video media platform (video only). Official site: https://ai.jiasuapi.com/",
-        "zh": "佳速API中转平台（纯视频）。官方地址：https://ai.jiasuapi.com/"
+        "zh": "佳速API中转平台（纯视频，含 minimax-h3 视频）。官方地址：https://ai.jiasuapi.com/"
       },
       "models": [
-        "sd-2.0-720",
-        "sd-2.0-720-fast",
-        "sd-2.0-933-720-fast-原生真人",
-        "sd-2.0-933-720-满血原生真人",
         "seedance-2.0-900",
-        "seedance-2.0-933",
+        "seedance-2.5-900",
         "seedance-2.5-101010",
         "seedance-2.5-301010",
-        "seedance-2.5-900",
-        "seedance2.0-mini-A",
-        "minimax-h3"
+        "sd-2.0-933-720-fast-原生真人",
+        "dola-sd-2.0-933",
+        "minimax-h3-jiasu"
       ],
       "latest": "1.0.11",
       "versions": [
@@ -220,7 +227,7 @@
         {
           "version": "1.0.11",
           "path": "plugins/tasks/jiasuapi/1.0.11/plugin.js",
-          "sha256": "3d5850dc46d612519e0f5c3fb9eab1e55b63c317ad2f56e579bbe49617cee7f9",
+          "sha256": "949846d782f2c0bb70c0d98b66bff9dbc13be7424219ae14f20e616fd6a52a81",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -242,17 +249,13 @@
           "decode": "decodeVideoSubmit",
           "render": "taskCreatedJsapi",
           "models": [
-            "sd-2.0-720",
-            "sd-2.0-720-fast",
-            "sd-2.0-933-720-fast-原生真人",
-            "sd-2.0-933-720-满血原生真人",
             "seedance-2.0-900",
-            "seedance-2.0-933",
+            "seedance-2.5-900",
             "seedance-2.5-101010",
             "seedance-2.5-301010",
-            "seedance-2.5-900",
-            "seedance2.0-mini-A",
-            "minimax-h3"
+            "sd-2.0-933-720-fast-原生真人",
+            "dola-sd-2.0-933",
+            "minimax-h3-jiasu"
           ]
         },
         {
@@ -266,17 +269,13 @@
         {
           "name": "openai_video",
           "models": [
-            "sd-2.0-720",
-            "sd-2.0-720-fast",
-            "sd-2.0-933-720-fast-原生真人",
-            "sd-2.0-933-720-满血原生真人",
             "seedance-2.0-900",
-            "seedance-2.0-933",
+            "seedance-2.5-900",
             "seedance-2.5-101010",
             "seedance-2.5-301010",
-            "seedance-2.5-900",
-            "seedance2.0-mini-A",
-            "minimax-h3"
+            "sd-2.0-933-720-fast-原生真人",
+            "dola-sd-2.0-933",
+            "minimax-h3-jiasu"
           ]
         }
       ]

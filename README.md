@@ -18,9 +18,27 @@
 | [`aicost`](plugins/tasks/aicost/1.0.7/README.md) | aicost API | https://www.aicost.me | 1.0.7 | 1 | 按次 |
 | [`sudashui`](plugins/tasks/sudashui/1.0.3/README.md) | SdAS API | https://api.sudashuiapi.com | 1.0.3 | 23 | 按次 |
 | [`meaicc`](plugins/tasks/meaicc/1.0.0/README.md) | MeAICC API | https://api.meaicc.com | 1.0.0 | 1 | 按次 |
-| [`gaisc`](plugins/tasks/gaisc/1.0.1/README.md) | g-aisc API | https://g-aisc.xyz | 1.0.1 | 7 | 按次 |
+| [`gaisc`](plugins/tasks/gaisc/1.0.2/README.md) | g-aisc API | https://g-aisc.xyz | 1.0.2 | 7 | 按次 |
 
 声明模型数 ≥ 渠道实际挂载数:插件只声明"上游明确支持"的模型,每个渠道按自己的 Key 勾选子集。
+
+### ⚠️ 站点专属别名(平台模型名唯一)
+
+New API 对**插件声明的模型名做全平台唯一校验(大小写不敏感)** —— 同一个模型名,全平台只能有一个
+任务插件"拥有"(安装时报 `plugin X model "a" conflicts with plugin Y model "b"`;路由同理,报
+`conflicts with plugin %s route %s`,所以自有路由务必带插件前缀命名空间)。
+
+于是当多个站点卖同一个模型时(例如 `MiniMax-H3` / `minimax-h3`),只能在插件侧声明成**站点专属别名**,
+由插件内部翻回上游真名:
+
+| 插件 | 声明名(渠道 `model_mapping` 的目标) | 上游真名 |
+|---|---|---|
+| `gaisc` | `MiniMax-H3-gaisc` | `MiniMax-H3` |
+| `jiasuapi` | `minimax-h3-jiasu` | `minimax-h3` |
+
+渠道侧仍用「别名-价格」写法(`MiniMax-H3-gaisc-0.50`、`minimax-h3-jiasu-1`),**client 看到的模型名
+由渠道决定**,不受插件声明名影响。
+
 
 ## 作为市场源使用
 
