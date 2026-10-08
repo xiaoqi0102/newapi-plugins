@@ -152,9 +152,10 @@
         "seedance-2.5-101010",
         "seedance-2.5-301010",
         "seedance-2.5-900",
-        "seedance2.0-mini-A"
+        "seedance2.0-mini-A",
+        "minimax-h3"
       ],
-      "latest": "1.0.10",
+      "latest": "1.0.11",
       "versions": [
         {
           "version": "1.0.7",
@@ -215,6 +216,21 @@
             "m.jiasuapi.com",
             "media.jiasuapi.com"
           ]
+        },
+        {
+          "version": "1.0.11",
+          "path": "plugins/tasks/jiasuapi/1.0.11/plugin.js",
+          "sha256": "3d5850dc46d612519e0f5c3fb9eab1e55b63c317ad2f56e579bbe49617cee7f9",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "ai.jiasuapi.com",
+            "ai1.jiasuapi.com",
+            "api.jiasuapi.com",
+            "relay.jiasuapi.com",
+            "m.jiasuapi.com",
+            "media.jiasuapi.com"
+          ]
         }
       ],
       "routes": [
@@ -235,7 +251,8 @@
             "seedance-2.5-101010",
             "seedance-2.5-301010",
             "seedance-2.5-900",
-            "seedance2.0-mini-A"
+            "seedance2.0-mini-A",
+            "minimax-h3"
           ]
         },
         {
@@ -258,7 +275,8 @@
             "seedance-2.5-101010",
             "seedance-2.5-301010",
             "seedance-2.5-900",
-            "seedance2.0-mini-A"
+            "seedance2.0-mini-A",
+            "minimax-h3"
           ]
         }
       ]
