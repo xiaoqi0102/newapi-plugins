@@ -291,12 +291,23 @@
       "models": [
         "sd-2-c1"
       ],
-      "latest": "1.0.0",
+      "latest": "1.0.1",
       "versions": [
         {
           "version": "1.0.0",
           "path": "plugins/tasks/meaicc/1.0.0/plugin.js",
           "sha256": "455d9b360972432556a887e923908a48e2ec7a48ac68b2867bf3534521e2e613",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "api.meaicc.com"
+          ],
+          "baseUrl": "https://api.meaicc.com"
+        },
+        {
+          "version": "1.0.1",
+          "path": "plugins/tasks/meaicc/1.0.1/plugin.js",
+          "sha256": "eb2d6d20dcc4effed1b435ba8b49b40bdd5dd11a9364f9a6a4a76af2ead99327",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -363,7 +374,7 @@
         "sdas-qd-seedance-2.0-mini-no-face-720p",
         "sdas-qd-seedance-2.0-no-face-480p"
       ],
-      "latest": "1.0.3",
+      "latest": "1.0.4",
       "versions": [
         {
           "version": "1.0.1",
@@ -395,6 +406,19 @@
           "version": "1.0.3",
           "path": "plugins/tasks/sudashui/1.0.3/plugin.js",
           "sha256": "790245a77f977c08917f3a31eebbdbc4b28408665f12afa08b5d66608289ef49",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "api.sudashuiapi.com",
+            "files.sudashuiapi.com",
+            "www.sudashuiapi.com"
+          ],
+          "baseUrl": "https://api.sudashuiapi.com"
+        },
+        {
+          "version": "1.0.4",
+          "path": "plugins/tasks/sudashui/1.0.4/plugin.js",
+          "sha256": "cb66deecaf99fd46c25fb122615eebcad72a53654b3cdd08c1c53cd89e6669f7",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [

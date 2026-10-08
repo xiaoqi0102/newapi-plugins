@@ -9,6 +9,9 @@
 - 全部 **按次计费**(插件内不声明按秒用量钩子,价格配在网关「模型定价」的固定单价里)
 - 素材形态按上游能力定:多数上游要求 **公网 URL**(上游服务端抓取,base64 / 本地文件被插件拦掉);
   `gaisc` 例外 —— 它的上游同时支持公网 URL / data URI / 纯 base64
+- 客户端手里只有本地文件 / base64 时,**先过 Qlike 网关的素材上传中转** `POST https://img.qlike.top/v1/files`
+  （图片/视频/音频 → 公网直链,上游文件站优先;见 https://img.qlike.top/api-docs §8），
+  再拿直链提交任务;客户端「参考素材中转 → 自定义上传接口」填这个地址即可自动完成
 
 ## 插件一览
 
@@ -16,8 +19,8 @@
 |---|---|---|---|---|---|
 | [`jiasuapi`](plugins/tasks/jiasuapi/1.0.11/README.md) | 佳速API | https://ai.jiasuapi.com | 1.0.11 | 11 | 按次 |
 | [`aicost`](plugins/tasks/aicost/1.0.7/README.md) | aicost API | https://www.aicost.me | 1.0.7 | 1 | 按次 |
-| [`sudashui`](plugins/tasks/sudashui/1.0.3/README.md) | SdAS API | https://api.sudashuiapi.com | 1.0.3 | 23 | 按次 |
-| [`meaicc`](plugins/tasks/meaicc/1.0.0/README.md) | MeAICC API | https://api.meaicc.com | 1.0.0 | 1 | 按次 |
+| [`sudashui`](plugins/tasks/sudashui/1.0.4/README.md) | SdAS API | https://api.sudashuiapi.com | 1.0.4 | 23 | 按次 |
+| [`meaicc`](plugins/tasks/meaicc/1.0.1/README.md) | MeAICC API | https://api.meaicc.com | 1.0.1 | 1 | 按次 |
 | [`gaisc`](plugins/tasks/gaisc/1.0.2/README.md) | g-aisc API | https://g-aisc.xyz | 1.0.2 | 7 | 按次 |
 
 声明模型数 ≥ 渠道实际挂载数:插件只声明"上游明确支持"的模型,每个渠道按自己的 Key 勾选子集。
