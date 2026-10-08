@@ -1,0 +1,174 @@
+# SdAS API (sudashui) · NewAPI 任务插件
+
+> **素材怎么给**：上游只收公网 http(s) 素材。把客户端「参考素材中转 → 自定义上传接口」填 `https://img.qlike.top/v1/files`，
+> 本地文件与 base64 会先被转成公网直链；详见 https://img.qlike.top/api-docs §8。
+
+把 [SdAS API](https://api.sudashuiapi.com/) 接成 NewAPI 的**视频**生成上游。该站本身是一个
+NewAPI 实例,所以模型 id、`/v1/models`、`/api/pricing` 的形态都是 NewAPI 那一套。
+
+- 插件 key:`sudashui` · 版本:`1.0.3` · 类型:任务插件(Task Plugin,渠道 61)
+- 协议:`openai_video`(下游标准 `/v1/videos` / `/{task_id}` / `/{task_id}/content`)
+- 计费:**仅按次**。插件只声明上游 `quota_type=1` 的按次视频模型,
+  **按秒 / 按量模型与图片模型一律不声明 ⇒ 从路由层堵死**(就算误加进渠道也调不通)
+- 上游地址:https://api.sudashuiapi.com
+- 文档:https://api-docs.sudashuiapi.com/ · 素材文件站:https://files.sudashuiapi.com
+
+## 变更记录
+
+- **1.0.5** 上游报文快照:`plugin_state.__outbound` 记录「将要发给上游的报文」(复算自 `buildSubmitRequest` 并脱敏:base64/超长值折叠、key/token 打码、超 16KB 降级为浅层字段),供网关面板「生成日志 → 视频详情」还原真实请求。**只加字段,提交逻辑与计费不受影响**;复算失败只在快照里记 `error`,不抛异常、不影响提交。
+- **1.0.3** 按用户指定**删掉 4 个按次模型**(声明 27→23):
+  `sdas-xl-sd2.0-903-mini-480p`、`sdas-qd-seedance-2.0-mini-480p`、
+  `sdas-wf-sd2.0-mini-933-480p`、`sdas-wf-sd2.0-mini-933-720p`;
+  配合网关侧「客户端别名(短名+价格)+ 模型映射」改造,对外只暴露
+  `sd2.0-mini-903-480p-0.83` / `sd2.0-mini-903-720p-0.85` 两个名字。
+  ⚠ **下架模型必须三处一起动**:插件声明(`meta.models` + `protocols[].models`)、
+  渠道模型列表、模型定价。只摘渠道没用 —— 只要名字还在插件声明里,
+  不挂渠道也能路由(网关按插件声明兜底)。
+- **1.0.2** 请求快照补齐 `reference_image_fields` / `reference_images_sent` / `_uploaded` / `_base64`
+  (此前只有数量,无法判定客户端用的是哪套字段名)
+- **1.0.1** 声明 27 个按次视频模型;修正块注释提前闭合(`jy-*/` 导致 `*/` 提前结束注释)的 bug
+- **1.0.0** 首版(视频专用 · 按次)
+
+## 建渠道
+
+1. 渠道 → 新建 → 类型选 **任务插件** → **绑定插件** `sudashui`
+2. **Base URL**:`https://api.sudashuiapi.com`
+3. **密钥**:`sk-…`(该站 API Key;换访问令牌可用它调 `/api/user/self`、`/api/pricing`)
+4. **模型**:见下表;本网关只挂 2 个「最便宜 + 支持真人」档(对外用短名+价格别名)
+5. **模型定价**:直接照抄该站 `/api/pricing` 的 **`model_price`** ——
+   它是**「美元/次」**,与本网关 `ModelPrice` 同单位,**1:1 直接用,不要做任何汇率换算**
+
+> ⛔ **别踩这个坑(2026-09-16 已踩并纠正)**:该站公告/描述里写「元/条」只是**渲染口径**,
+> 拿它 ÷7.3 会让本站比上游**少记 7.3 倍**(本站记 $0.1137,上游实收 $0.83)。
+> ✅ **拿不到 `/api/pricing` 时的最稳办法**:跑一条真实任务后查上游任务详情,
+> **`data.quota ÷ 500000` = 上游实收美元**(实测 `quota=415000` = 0.83×500000 ✓)。
+
+## 上游协议差异(插件已全部翻译好)
+
+| 项 | 盐值AI / 下游发出 | 本插件 → 上游 |
+|---|---|---|
+| 媒体字段 | `image_urls` / `video_urls` / `audio_urls` | `metadata.payload` 的 **JSON 字符串**里放 `imageUrls` / `videoUrls` / `audioUrls` |
+| 画面比例 | `ratio` | `aspectRatio`(在 payload 内) |
+| 时长 | `seconds` | `duration`(4~15 秒) |
+| 模式 | — | 有首/尾帧 → `mode:"frames"`,否则 `mode:"references"` |
+| 分辨率 | `resolution` | **不传**(分辨率写在模型名里) |
+| 提示词引用 | `@Image1` | 自动转小写 `@image1`(上游只认小写) |
+
+上游接口:提交 `POST /v1/video/generations`、查询 `GET /v1/video/generations/{task_id}`;
+状态机 `SUBMITTED → IN_PROGRESS → SUCCESS / FAILURE`。
+
+**解析防坑**:该站失败时会把**错误文本塞在 `result_url` 字段**里(而不是留空),
+插件先判状态、只把成功状态下的链接当直链用。
+
+## 请求快照(1.0.2 起,排障用)
+
+插件在提交时把客户端原始参数写进 `tasks.private_data.plugin_state.request`,事后可以用 SQL 取回
+(New API 默认**不落请求体**,失败任务的提示词只有这一步能捞)。
+
+```sql
+SELECT id, status, fail_reason,
+       private_data->'plugin_state'->'request'->>'prompt'                 AS prompt,
+       private_data->'plugin_state'->'request'->>'reference_image_fields' AS 发图字段,
+       private_data->'plugin_state'->'request'->>'reference_images_sent'  AS 发了几张,
+       private_data->'plugin_state'->'request'->>'reference_images_count' AS 有效几张
+FROM tasks WHERE channel_id = <本渠道 id> ORDER BY id DESC LIMIT 10;
+```
+
+`reference_image_fields` 是判断**客户端用的哪套协议**的关键(取值实测,2026-09-16):
+
+| 取值 | 含义 |
+|---|---|
+| `["image_urls"]` | 盐值AI「**统一视频入口**」协议 —— **实测这条是唯一实际会出现的** |
+| `["image_refs"]` / `["image_refs(base64)"]` | OpenAI 兼容协议,图片内联 base64 |
+| `["reference_images(上传文件)"]` | multipart 上传的文件 |
+| `["metadata.start_frame"]` 等 | 图片藏在嵌套字段里 |
+
+> ⚠️ **为什么实际只会看到 `image_urls`**:盐值AI 桌面客户端若把本地图内联成 base64,
+> 请求体会膨胀到几十 MB(单图 base64 ≈ 原图 ×1.37),上游和网关都会直接判失败。
+> 所以客户端**强制先上传拿公网 URL**,再以 `image_urls` 提交;本地素材不是公网地址时它
+> 会在客户端就报错、根本不发出请求。此表其余取值仅作**异常配置的识别信号**用。
+>
+> 注意:**素材上传是客户端直连图床完成的,不经过本网关**(设置 → 视频 → 参考素材中转:
+> 免费图床 uguu/litterbox/catbox/0x0/imgbb、自定义上传接口、阿里云 OSS、腾讯云 COS、
+> Cloudflare R2、AWS S3)。因此素材 URL 的**可达性与有效期**完全由该设置决定 ——
+> 用 uguu 这类免费图床(约 3 小时过期)时上游容易抓取失败导致出片失败,
+> 建议改成自有 OSS/COS/R2。实测:同一客户端一次用 uguu、一次用上游自有文件站,后者更稳。
+
+其余字段:`reference_images`(落库的公网 URL,最多 8 条)、`reference_images_uploaded`、
+`reference_images_base64`、`reference_videos` / `reference_audios`(数量)、`seconds`、
+`aspect_ratio`、`sudashui_mode`、`generate_audio`。
+
+## 提交前的硬限制(插件直接拦掉,不烧上游额度)
+
+- 参考图 ≤ 9、参考视频 ≤ 3、参考音频 ≤ 3
+- 时长 4~15 秒(注意部分 720p 上限 12 秒)
+- 提示词 ≤ 15000 字符
+- 素材必须是**公网 URL**(上游服务端抓取),base64 / 本地文件会被拒
+- ✅ **素材不限域名**:任意公网可达地址都能用 —— 实测 `example.com`、阿里云 OSS、纯 `IP:端口` 均**原样透传**;插件只校验 `http(s)://` 协议头,不做任何域名/白名单判断。
+  (源码里的 `allowedHosts` 只是**插件自身**允许出网的域名,跟素材 URL 无关。)
+- 素材只收 jpg/png/webp、mp4/mov、mp3/wav(**不收 gif**)
+
+## 模型清单(23 个按次视频模型,单价 = 上游 `model_price`,单位**美元/次**,1:1 直接用)
+
+✅ = 本网关**对外挂载**的 2 个(对外名 = 短名 + 价格,见下节);
+❌ = 1.0.3 起**已删**的 4 个(声明、渠道、价格三处都已摘掉)。
+
+| 模型 | 单价 | 参考素材 / 时长 | 真人 |
+|---|---|---|---|
+| ✅ `sdas-pd-sd2.0-mini-903-480p` | $0.83 | 9图0视频3音频,5-15s | 支持 |
+| ✅ `sdas-pd-sd2.0-mini-903-720p` | $0.85 | 9图0视频3音频,5-12s | 支持 |
+| ❌ `sdas-wf-sd2.0-mini-933-480p` | $1.24 | 9图3视频3音频,4-15s | 支持 |
+| ❌ `sdas-wf-sd2.0-mini-933-720p` | $1.24 | 9图3视频3音频,4-12s | 支持 |
+| ❌ `sdas-xl-sd2.0-903-mini-480p` | $1.50 | 9图0视频3音频,15s | 支持 |
+| ❌ `sdas-qd-seedance-2.0-mini-480p` | $1.50 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-mini-no-face-480p` | $1.50 | 同上 | 卡人 |
+| `sdas-mj-minimax-h3-2k` | $1.80 | 海螺 h3,9图0视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-fast-480p` | $2.00 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-fast-no-face-480p` | $2.00 | 同上 | 卡人 |
+| `sdas-qd-seedance-2.0-mini-720p` | $2.20 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-mini-no-face-720p` | $2.20 | 同上 | 卡人 |
+| `sdas-qd-seedance-2.0-480p` | $2.50 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-no-face-480p` | $2.50 | 同上 | 卡人 |
+| `sdas-qd-seedance-2.0-fast-720p` | $2.80 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-fast-no-face-720p` | $2.80 | 同上 | 卡人 |
+| `sdas-hn-sd2.0-fast-720p` | $2.80 | 4图3视频1音频,5/10/15s | 支持 |
+| `sdas-qd-seedance-2.0-720p` | $3.50 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-no-face-720p` | $3.50 | 同上 | 卡人 |
+| `sdas-ll-sd2.5-pro-30s-720p` | $5.25 | 30图3视频,固定 30s | 支持 |
+| `sdas-hn-sd2.0-933-720p` | $5.50 | — | 支持 |
+| `sdas-qd-seedance-2.0-1080p` | $5.50 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-no-face-1080p` | $5.50 | 同上 | 卡人 |
+| `sdas-xg-sd2.0-pro-933-2-720p` | $5.70 | — | 支持 |
+| `sdas-hn-sd2.0-pro-933-720p` | $6.60 | 9图3视频3音频,15s | 支持 |
+| `sdas-qd-seedance-2.0-4k` | $16.00 | 9图3视频3音频,4-15s | 支持 |
+| `sdas-qd-seedance-2.0-no-face-4k` | $16.00 | 同上 | 卡人 |
+
+上游「按量计费」那批(`sdas-mg-*` / `sdas-rd-*` 等,单位元/秒)与 6 个图片模型
+(`jy-*`、`sdas-zh-gtp-img2`)**本插件不声明**,以匹配"只接按次"的计费口径。
+
+## 本网关的对外命名:短名 + 价格(客户端模型名)
+
+上游真名很长(`sdas-pd-sd2.0-mini-903-480p`),下游选模型时看不出价格,所以本网关侧做了
+**模型映射**:渠道「模型」里填的是**客户端模型名(短名 + 价格后缀)**,
+「模型重定向」把它翻回上游真名,「模型定价」按**客户端模型名**写价。
+
+| 渠道里暴露(客户端调用用这个) | 重定向到(上游真名) | 定价 |
+|---|---|---|
+| `sd2.0-mini-903-480p-0.83` | `sdas-pd-sd2.0-mini-903-480p` | 0.83 /次 |
+| `sd2.0-mini-903-720p-0.85` | `sdas-pd-sd2.0-mini-903-720p` | 0.85 /次 |
+
+- 短名 = 去掉 `sdas-pd-` 平台/档位前缀
+- 价格后缀统一 **2 位小数**(美元/次),一眼可比价
+- 链路:`/v1/videos` → 按客户端模型名选渠道 → 定价按**客户端模型名**查(`OriginModelName`)→
+  重定向成上游真名发给上游(`UpstreamModelName`,插件拿到的 `ctx.upstreamModel`)
+- ⚠ 上游真名**仍然可调用**(网关按插件声明兜底路由),定价行也保留着,不是漏洞,是兼容口子
+
+## ⚠️ 部署提醒
+
+- 该站提交前也要服务端抓取参考素材,**同样容易踩 CDN 15 秒应答超时(HTTP 524)** ——
+  规则引擎里给 `/videos*`、`/v1/videos*`、`/video/generations*`、`/v1/video/generations*`
+  补 `HTTPUpstreamTimeout → ResponseTimeout: 600`,**保存后记得发布**。
+- 上游文档里的失败样例原文 `"fail_reason": "Real human faces are not supported."` ——
+  带 `no-face` 的型号不要用来做真人脸;要真人选上表标「支持」的。
+- 实测参考:480p 档提交仅 **986 ms**、出片约 20 分钟、扣费 **$0.83**(与上游 1:1)——
+  该站受理轻,基本不会触发 524。

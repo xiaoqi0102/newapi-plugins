@@ -13,7 +13,7 @@
       "models": [
         "seedance2.0-900-fast"
       ],
-      "latest": "1.0.7",
+      "latest": "1.0.8",
       "versions": [
         {
           "version": "1.0.5",
@@ -50,6 +50,18 @@
             "aicost.me"
           ],
           "baseUrl": "https://www.aicost.me"
+        },
+        {
+          "version": "1.0.8",
+          "path": "plugins/tasks/aicost/1.0.8/plugin.js",
+          "sha256": "94a0621125e445ca740eb0200a826a79cddf746e2fc307296586210dbc9034d0",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "www.aicost.me",
+            "aicost.me"
+          ],
+          "baseUrl": "https://www.aicost.me"
         }
       ],
       "protocols": [
@@ -78,7 +90,7 @@
         "happyhorse-1.0-i2v",
         "happyhorse-1.0-r2v"
       ],
-      "latest": "1.0.2",
+      "latest": "1.0.3",
       "versions": [
         {
           "version": "1.0.0",
@@ -106,6 +118,17 @@
           "version": "1.0.2",
           "path": "plugins/tasks/gaisc/1.0.2/plugin.js",
           "sha256": "a43e4cdd38f4293f70b7e42bfa9ede5c76168f75bd88995015bba5fb761de39e",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "g-aisc.xyz"
+          ],
+          "baseUrl": "https://g-aisc.xyz"
+        },
+        {
+          "version": "1.0.3",
+          "path": "plugins/tasks/gaisc/1.0.3/plugin.js",
+          "sha256": "6aa8e638451a127c4f250aa040799d2f9058fb2f680fdc850fb6af3f27d870ca",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -162,7 +185,7 @@
         "dola-sd-2.0-933",
         "minimax-h3-jiasu"
       ],
-      "latest": "1.0.11",
+      "latest": "1.0.12",
       "versions": [
         {
           "version": "1.0.7",
@@ -238,6 +261,21 @@
             "m.jiasuapi.com",
             "media.jiasuapi.com"
           ]
+        },
+        {
+          "version": "1.0.12",
+          "path": "plugins/tasks/jiasuapi/1.0.12/plugin.js",
+          "sha256": "c3993574a0a7add1f63b5f2ae3e28dcc0fa378b0caa34a4d5c066175f1f182c8",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "ai.jiasuapi.com",
+            "ai1.jiasuapi.com",
+            "api.jiasuapi.com",
+            "relay.jiasuapi.com",
+            "m.jiasuapi.com",
+            "media.jiasuapi.com"
+          ]
         }
       ],
       "routes": [
@@ -291,7 +329,7 @@
       "models": [
         "sd-2-c1"
       ],
-      "latest": "1.0.1",
+      "latest": "1.0.2",
       "versions": [
         {
           "version": "1.0.0",
@@ -308,6 +346,17 @@
           "version": "1.0.1",
           "path": "plugins/tasks/meaicc/1.0.1/plugin.js",
           "sha256": "eb2d6d20dcc4effed1b435ba8b49b40bdd5dd11a9364f9a6a4a76af2ead99327",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "api.meaicc.com"
+          ],
+          "baseUrl": "https://api.meaicc.com"
+        },
+        {
+          "version": "1.0.2",
+          "path": "plugins/tasks/meaicc/1.0.2/plugin.js",
+          "sha256": "09755c0170167dfdac673cf0141580450a81ac0eeaf0ec860744bbd76f043e6d",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -374,7 +423,7 @@
         "sdas-qd-seedance-2.0-mini-no-face-720p",
         "sdas-qd-seedance-2.0-no-face-480p"
       ],
-      "latest": "1.0.4",
+      "latest": "1.0.5",
       "versions": [
         {
           "version": "1.0.1",
@@ -419,6 +468,19 @@
           "version": "1.0.4",
           "path": "plugins/tasks/sudashui/1.0.4/plugin.js",
           "sha256": "cb66deecaf99fd46c25fb122615eebcad72a53654b3cdd08c1c53cd89e6669f7",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "api.sudashuiapi.com",
+            "files.sudashuiapi.com",
+            "www.sudashuiapi.com"
+          ],
+          "baseUrl": "https://api.sudashuiapi.com"
+        },
+        {
+          "version": "1.0.5",
+          "path": "plugins/tasks/sudashui/1.0.5/plugin.js",
+          "sha256": "0b32f5d072ea8af0da50ab6ba330d593047609aa154c47cc876c57cc51d7d598",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
