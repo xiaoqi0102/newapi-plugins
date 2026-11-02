@@ -188,7 +188,7 @@
         "sd-2.5-j5-v2",
         "minimax-h3-jiasu"
       ],
-      "latest": "1.0.14",
+      "latest": "1.0.17",
       "versions": [
         {
           "version": "1.0.7",
@@ -284,6 +284,36 @@
           "version": "1.0.14",
           "path": "plugins/tasks/jiasuapi/1.0.14/plugin.js",
           "sha256": "5016c66ca53e52eb091b5b6bec80922bba554d673c5d19d51248cc44a267692f",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "ai.jiasuapi.com",
+            "ai1.jiasuapi.com",
+            "api.jiasuapi.com",
+            "relay.jiasuapi.com",
+            "m.jiasuapi.com",
+            "media.jiasuapi.com"
+          ]
+        },
+        {
+          "version": "1.0.15",
+          "path": "plugins/tasks/jiasuapi/1.0.15/plugin.js",
+          "sha256": "8452689f7b7f4eace8ecb17675a8bbaa537171ecc5639a273923bf91e13a1ff1",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "ai.jiasuapi.com",
+            "ai1.jiasuapi.com",
+            "api.jiasuapi.com",
+            "relay.jiasuapi.com",
+            "m.jiasuapi.com",
+            "media.jiasuapi.com"
+          ]
+        },
+        {
+          "version": "1.0.17",
+          "path": "plugins/tasks/jiasuapi/1.0.17/plugin.js",
+          "sha256": "8987c329f43579d1008486df889913b88a3395e63f9e96d0646bf8f27155ce88",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
