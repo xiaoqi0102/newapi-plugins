@@ -177,15 +177,18 @@
         "zh": "佳速API中转平台（纯视频，含 minimax-h3 视频）。官方地址：https://ai.jiasuapi.com/"
       },
       "models": [
-        "seedance-2.0-900",
-        "seedance-2.5-900",
-        "seedance-2.5-101010",
-        "seedance-2.5-301010",
         "sd-2.0-933-720-fast-原生真人",
-        "dola-sd-2.0-933",
+        "sd-2.0-J1",
+        "sd-2.0-mini-503-J3",
+        "sd-2.0-mini-J1",
+        "sd-2.5-j2-V",
+        "sd-2.5-J3-D1",
+        "sd-2.5-J3-doubao",
+        "sd-2.5-J4-m1-官转",
+        "sd-2.5-j5-v2",
         "minimax-h3-jiasu"
       ],
-      "latest": "1.0.12",
+      "latest": "1.0.14",
       "versions": [
         {
           "version": "1.0.7",
@@ -276,6 +279,21 @@
             "m.jiasuapi.com",
             "media.jiasuapi.com"
           ]
+        },
+        {
+          "version": "1.0.14",
+          "path": "plugins/tasks/jiasuapi/1.0.14/plugin.js",
+          "sha256": "5016c66ca53e52eb091b5b6bec80922bba554d673c5d19d51248cc44a267692f",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "ai.jiasuapi.com",
+            "ai1.jiasuapi.com",
+            "api.jiasuapi.com",
+            "relay.jiasuapi.com",
+            "m.jiasuapi.com",
+            "media.jiasuapi.com"
+          ]
         }
       ],
       "routes": [
@@ -287,12 +305,15 @@
           "decode": "decodeVideoSubmit",
           "render": "taskCreatedJsapi",
           "models": [
-            "seedance-2.0-900",
-            "seedance-2.5-900",
-            "seedance-2.5-101010",
-            "seedance-2.5-301010",
             "sd-2.0-933-720-fast-原生真人",
-            "dola-sd-2.0-933",
+            "sd-2.0-J1",
+            "sd-2.0-mini-503-J3",
+            "sd-2.0-mini-J1",
+            "sd-2.5-j2-V",
+            "sd-2.5-J3-D1",
+            "sd-2.5-J3-doubao",
+            "sd-2.5-J4-m1-官转",
+            "sd-2.5-j5-v2",
             "minimax-h3-jiasu"
           ]
         },
@@ -307,14 +328,35 @@
         {
           "name": "openai_video",
           "models": [
-            "seedance-2.0-900",
-            "seedance-2.5-900",
-            "seedance-2.5-101010",
-            "seedance-2.5-301010",
             "sd-2.0-933-720-fast-原生真人",
-            "dola-sd-2.0-933",
+            "sd-2.0-J1",
+            "sd-2.0-mini-503-J3",
+            "sd-2.0-mini-J1",
+            "sd-2.5-j2-V",
+            "sd-2.5-J3-D1",
+            "sd-2.5-J3-doubao",
+            "sd-2.5-J4-m1-官转",
+            "sd-2.5-j5-v2",
             "minimax-h3-jiasu"
           ]
+        }
+      ],
+      "usageSchema": {
+        "seconds": {
+          "type": "number",
+          "unit": "second",
+          "description": {
+            "en": "Generated video duration",
+            "zh": "生成视频时长"
+          }
+        }
+      },
+      "usageExamples": [
+        {
+          "label": "768p · 30s",
+          "facts": {
+            "seconds": 30
+          }
         }
       ]
     },
