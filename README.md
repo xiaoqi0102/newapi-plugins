@@ -17,11 +17,12 @@
 
 | 插件 key | 名称 | 上游 | 版本 | 声明模型 | 计费 |
 |---|---|---|---|---|---|
-| [`jiasuapi`](plugins/tasks/jiasuapi/1.0.11/README.md) | 佳速API | https://ai.jiasuapi.com | 1.0.11 | 11 | 按次 |
-| [`aicost`](plugins/tasks/aicost/1.0.7/README.md) | aicost API | https://www.aicost.me | 1.0.7 | 1 | 按次 |
-| [`sudashui`](plugins/tasks/sudashui/1.0.4/README.md) | SdAS API | https://api.sudashuiapi.com | 1.0.4 | 23 | 按次 |
-| [`meaicc`](plugins/tasks/meaicc/1.0.1/README.md) | MeAICC API | https://api.meaicc.com | 1.0.1 | 1 | 按次 |
-| [`gaisc`](plugins/tasks/gaisc/1.0.2/README.md) | g-aisc API | https://g-aisc.xyz | 1.0.2 | 7 | 按次 |
+| [`jiasuapi`](plugins/tasks/jiasuapi/1.0.17/README.md) | 佳速API | https://ai.jiasuapi.com | 1.0.17 | 10 | 按次 |
+| [`aicost`](plugins/tasks/aicost/1.0.8/README.md) | aicost API | https://www.aicost.me | 1.0.8 | 1 | 按次 |
+| [`sudashui`](plugins/tasks/sudashui/1.0.5/README.md) | SdAS API | https://api.sudashuiapi.com | 1.0.5 | 23 | 按次 |
+| [`meaicc`](plugins/tasks/meaicc/1.0.2/README.md) | MeAICC API | https://api.meaicc.com | 1.0.2 | 1 | 按次 |
+| [`gaisc`](plugins/tasks/gaisc/1.0.3/README.md) | g-aisc API | https://g-aisc.xyz | 1.0.3 | 7 | 按次 |
+| [`qihang`](plugins/tasks/qihang/1.0.0/README.md) | 启航 API | https://166683.xyz | 1.0.0 | 2 | 按次 |
 
 声明模型数 ≥ 渠道实际挂载数:插件只声明"上游明确支持"的模型,每个渠道按自己的 Key 勾选子集。
 

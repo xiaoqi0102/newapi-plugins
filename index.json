@@ -463,6 +463,42 @@
       ]
     },
     {
+      "key": "qihang",
+      "name": "启航 API",
+      "icon": "text:qh",
+      "description": {
+        "en": "Qihang unified API (166683.xyz) video generation, per-call models.",
+        "zh": "启航统一 API(166683.xyz)视频生成,仅按次计费模型。"
+      },
+      "models": [
+        "seedance-2.0480p",
+        "Seedance-933-720p"
+      ],
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugins/tasks/qihang/1.0.0/plugin.js",
+          "sha256": "aae227cccb7a11a4a9b0073b76685fc5309808688756d6cd4ca3012304db27ba",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "166683.xyz"
+          ],
+          "baseUrl": "https://166683.xyz"
+        }
+      ],
+      "protocols": [
+        {
+          "name": "openai_video",
+          "models": [
+            "seedance-2.0480p",
+            "Seedance-933-720p"
+          ]
+        }
+      ]
+    },
+    {
       "key": "sudashui",
       "name": "SdAS API",
       "icon": "text:sdas",
