@@ -169,6 +169,78 @@
       ]
     },
     {
+      "key": "huimiao",
+      "name": "Huimiao AI",
+      "icon": "text:hm",
+      "description": {
+        "en": "Huimiao AI (huimiaovip.com) video generation, 20 models, credits billing.",
+        "zh": "慧喵 Huimiao AI(huimiaovip.com)视频生成,20 个模型,积分计费。"
+      },
+      "models": [
+        "hm-video-sd-2.5-flash-gz",
+        "hm-video-wan3.0-gf",
+        "hm-video-wan3.0-prime-gf",
+        "hm-video-sd-2.0-mini-gz",
+        "hm-video-sd-2.0-fast-gz",
+        "hm-video-sd-2.0-full-gz",
+        "hm-video-wan3.0-deal-mm",
+        "hm-sd-2.5-30-0-10-m",
+        "hm-video-sd-2.5-full-gz",
+        "hm-video-vidu-q4-mm",
+        "hm-sd-2.5-30-0-10-mm",
+        "hm-video-h3-768-gz-jj",
+        "hm-video-h3-2k-gz-jj",
+        "hm-video-sd-2.5-deal-persecond",
+        "hm-video-heygen-nn",
+        "hm-sd-2.5-30-0-10-gz-persecond-ll",
+        "hm-sd-2.5-30-0-10-720-gz-persecond-ll",
+        "hm-sd-2.0-mini-gz",
+        "hm-sd-2.0-fast-gz",
+        "hm-wan3.0-prime-deal-mc"
+      ],
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugins/tasks/huimiao/1.0.0/plugin.js",
+          "sha256": "aa20acf96d2a039aaa02a19764a4b2de2b748fb5f3401adea58eab8b4ee3a71d",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "huimiaovip.com"
+          ],
+          "baseUrl": "https://huimiaovip.com"
+        }
+      ],
+      "protocols": [
+        {
+          "name": "openai_video",
+          "models": [
+            "hm-video-sd-2.5-flash-gz",
+            "hm-video-wan3.0-gf",
+            "hm-video-wan3.0-prime-gf",
+            "hm-video-sd-2.0-mini-gz",
+            "hm-video-sd-2.0-fast-gz",
+            "hm-video-sd-2.0-full-gz",
+            "hm-video-wan3.0-deal-mm",
+            "hm-sd-2.5-30-0-10-m",
+            "hm-video-sd-2.5-full-gz",
+            "hm-video-vidu-q4-mm",
+            "hm-sd-2.5-30-0-10-mm",
+            "hm-video-h3-768-gz-jj",
+            "hm-video-h3-2k-gz-jj",
+            "hm-video-sd-2.5-deal-persecond",
+            "hm-video-heygen-nn",
+            "hm-sd-2.5-30-0-10-gz-persecond-ll",
+            "hm-sd-2.5-30-0-10-720-gz-persecond-ll",
+            "hm-sd-2.0-mini-gz",
+            "hm-sd-2.0-fast-gz",
+            "hm-wan3.0-prime-deal-mc"
+          ]
+        }
+      ]
+    },
+    {
       "key": "jiasuapi",
       "name": "佳速API",
       "icon": "text:佳速",
