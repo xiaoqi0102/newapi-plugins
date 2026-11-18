@@ -739,10 +739,9 @@
       },
       "models": [
         "videopipe-2.0",
-        "videopipe-dola2.0",
-        "videopipe-sd-20-10s"
+        "videopipe-dola2.0"
       ],
-      "latest": "1.0.2",
+      "latest": "1.0.3",
       "versions": [
         {
           "version": "1.0.0",
@@ -776,6 +775,17 @@
             "videopipe.cc"
           ],
           "baseUrl": "https://videopipe.cc"
+        },
+        {
+          "version": "1.0.3",
+          "path": "plugins/tasks/videopipe/1.0.3/plugin.js",
+          "sha256": "6b2fd1ea6af2e811717ae28738c3dfffb04548640725918dd1509e0258066feb",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "videopipe.cc"
+          ],
+          "baseUrl": "https://videopipe.cc"
         }
       ],
       "protocols": [
@@ -783,8 +793,7 @@
           "name": "openai_video",
           "models": [
             "videopipe-2.0",
-            "videopipe-dola2.0",
-            "videopipe-sd-20-10s"
+            "videopipe-dola2.0"
           ]
         }
       ]
