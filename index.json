@@ -740,12 +740,23 @@
       "models": [
         "videopipe-video"
       ],
-      "latest": "1.0.0",
+      "latest": "1.0.1",
       "versions": [
         {
           "version": "1.0.0",
           "path": "plugins/tasks/videopipe/1.0.0/plugin.js",
-          "sha256": "41ce8b8a4640a5a1c05b118ee0437ff1fca586d8405fc63d5d7ab1cbdc104a82",
+          "sha256": "9cd9a151371c7f24f739bd2679d0ad9a71825b7160d4dac3e3af829b202c315e",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "videopipe.cc"
+          ],
+          "baseUrl": "https://videopipe.cc"
+        },
+        {
+          "version": "1.0.1",
+          "path": "plugins/tasks/videopipe/1.0.1/plugin.js",
+          "sha256": "624c9947569c03f4e044c60e441e4fd64b3bd17a39550573a6511d33a9795888",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [

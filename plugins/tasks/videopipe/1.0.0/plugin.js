@@ -464,3 +464,95 @@ export function parseTaskResult(ctx, res) {
   if (progress !== undefined) result.progress = progress;
   return result;
 }
+
+/* ------------------------------------------------------------------ *
+ * 宿主钩子：产物清单 / 内容下载 / 标准面渲染
+ * （rc.51 起 openai_video 协议缺 listArtifacts 会整份拒装）
+ * ------------------------------------------------------------------ */
+
+export function listArtifacts(task) {
+  if (!task || task.status !== "SUCCESS") return [];
+  return pickVideoUrl(task.data || {}) ? [{ key: "video", type: "video" }] : [];
+}
+
+export function buildContentRequest(ctx) {
+  var task = ctx && ctx.task ? ctx.task : { data: ctx && ctx.data, status: ctx && ctx.status };
+  var url = pickVideoUrl((task && task.data) || {});
+  if (!url) throw new Error("artifact_not_found");
+  // 上游产物是第三方 CDN 直链：匿名可读，绝不带本站 Key（防盗链也可能因此失效）
+  return { url: url, method: "GET", credentialless: true };
+}
+
+export const native = {
+  decodeVideoSubmit: function (ctx) {
+    return protocols.openai_video.decodeRequest(ctx);
+  },
+  taskCreated: function (ctx, task) {
+    return protocols.openai_video.render(ctx, task);
+  },
+  taskStatus: function (_ctx, task) {
+    var output = {
+      task_id: task && task.task_id,
+      model: trimmed((task && task.data && task.data.model) || ""),
+      status: task && task.status,
+      progress: (task && task.progress) || "0%",
+    };
+    var url = pickVideoUrl((task && task.data) || {});
+    if (task && task.status === "SUCCESS" && url) output.result_url = url;
+    if (task && task.status === "FAILURE") {
+      output.fail_reason = trimmed(task.fail_reason) || "task failed";
+    }
+    return output;
+  },
+  error: function (_ctx, error) {
+    return { code: trimmed(error && error.code) || "upstream_error", message: trimmed(error && error.message) };
+  },
+};
+
+export const protocols = {
+  openai_video: {
+    decodeRequest: function (ctx) {
+      var decoded = decodeAnyObject(ctx && ctx.body);
+      var req = decoded.req;
+      var files = decoded.files || [];
+      var model = canonicalModel(trimmed(ctx && ctx.model));
+      if (!model) throw new Error("model is required");
+      if (files.length) {
+        throw new Error(
+          "VideoPipe 上游按公网 https 地址取素材，不支持直接上传文件；请先在「设置 → 视频 → 参考素材中转 → 自定义上传接口」填 https://img.qlike.top/v1/files 转成公网直链后重试"
+        );
+      }
+      var prompt = clientPrompt(req);
+      if (!prompt) throw new Error("prompt is required");
+      req.prompt = prompt;
+      return {
+        kind: "submit",
+        model: model,
+        action: "video",
+        requestBody: Object.assign({}, req, { model: model, prompt: prompt }),
+      };
+    },
+    render: function (_ctx, task) {
+      var statusMap = {
+        QUEUED: "queued",
+        IN_PROGRESS: "in_progress",
+        SUCCESS: "completed",
+        FAILURE: "failed",
+      };
+      var data = (task && task.data) || {};
+      var output = {
+        id: task && task.task_id,
+        object: "video",
+        model: trimmed(data.model || ""),
+        status: statusMap[trimmed(task && task.status).toUpperCase()] || "queued",
+        progress: Number(String((task && task.progress) || "0").replace("%", "")) || 0,
+      };
+      var url = pickVideoUrl(data);
+      if (task && task.status === "SUCCESS" && url) output.result_url = url;
+      if (task && task.status === "FAILURE") {
+        output.error = { message: trimmed(task.fail_reason) || "task failed", code: "" };
+      }
+      return output;
+    },
+  },
+};
