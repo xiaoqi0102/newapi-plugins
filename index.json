@@ -728,6 +728,40 @@
           ]
         }
       ]
+    },
+    {
+      "key": "videopipe",
+      "name": "VideoPipe",
+      "icon": "text:vp",
+      "description": {
+        "en": "VideoPipe (videopipe.cc) creative-station video generation, credits billing.",
+        "zh": "VideoPipe 创作站（videopipe.cc）视频生成，积分计费。"
+      },
+      "models": [
+        "videopipe-video"
+      ],
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugins/tasks/videopipe/1.0.0/plugin.js",
+          "sha256": "41ce8b8a4640a5a1c05b118ee0437ff1fca586d8405fc63d5d7ab1cbdc104a82",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "videopipe.cc"
+          ],
+          "baseUrl": "https://videopipe.cc"
+        }
+      ],
+      "protocols": [
+        {
+          "name": "openai_video",
+          "models": [
+            "videopipe-video"
+          ]
+        }
+      ]
     }
   ]
 }
