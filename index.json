@@ -200,7 +200,7 @@
         "官转-Sd-2.5-flash-支持人脸",
         "官转-Sd-2.0-fast-支持人脸"
       ],
-      "latest": "1.0.3",
+      "latest": "1.0.4",
       "versions": [
         {
           "version": "1.0.0",
@@ -239,6 +239,17 @@
           "version": "1.0.3",
           "path": "plugins/tasks/huimiao/1.0.3/plugin.js",
           "sha256": "2271517107eaf2bb6cb1c4bc4a450e342b1ff1af7854b61a854efb63c08ae4a2",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "huimiaovip.com"
+          ],
+          "baseUrl": "https://huimiaovip.com"
+        },
+        {
+          "version": "1.0.4",
+          "path": "plugins/tasks/huimiao/1.0.4/plugin.js",
+          "sha256": "447504a284a555c25131976f8e39617faa220550d545c727a4b4fa6eb3e342cf",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
