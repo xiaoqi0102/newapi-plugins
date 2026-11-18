@@ -198,7 +198,7 @@
         "hm-sd-2.0-fast-gz",
         "hm-wan3.0-prime-deal-mc"
       ],
-      "latest": "1.0.1",
+      "latest": "1.0.2",
       "versions": [
         {
           "version": "1.0.0",
@@ -215,6 +215,17 @@
           "version": "1.0.1",
           "path": "plugins/tasks/huimiao/1.0.1/plugin.js",
           "sha256": "9af0576fe658d9441dc3f1fcf28dca01c8b487d8827205c6518334b4320f7ddf",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "huimiaovip.com"
+          ],
+          "baseUrl": "https://huimiaovip.com"
+        },
+        {
+          "version": "1.0.2",
+          "path": "plugins/tasks/huimiao/1.0.2/plugin.js",
+          "sha256": "5e8f642fc23580771721e1d0a6676655ceb48d0ce3b751c1b5524216817700a2",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
