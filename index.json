@@ -196,9 +196,11 @@
         "hm-sd-2.5-30-0-10-720-gz-persecond-ll",
         "hm-sd-2.0-mini-gz",
         "hm-sd-2.0-fast-gz",
-        "hm-wan3.0-prime-deal-mc"
+        "hm-wan3.0-prime-deal-mc",
+        "官转-Sd-2.5-flash-支持人脸",
+        "官转-Sd-2.0-fast-支持人脸"
       ],
-      "latest": "1.0.2",
+      "latest": "1.0.3",
       "versions": [
         {
           "version": "1.0.0",
@@ -232,6 +234,17 @@
             "huimiaovip.com"
           ],
           "baseUrl": "https://huimiaovip.com"
+        },
+        {
+          "version": "1.0.3",
+          "path": "plugins/tasks/huimiao/1.0.3/plugin.js",
+          "sha256": "2271517107eaf2bb6cb1c4bc4a450e342b1ff1af7854b61a854efb63c08ae4a2",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "huimiaovip.com"
+          ],
+          "baseUrl": "https://huimiaovip.com"
         }
       ],
       "protocols": [
@@ -257,7 +270,9 @@
             "hm-sd-2.5-30-0-10-720-gz-persecond-ll",
             "hm-sd-2.0-mini-gz",
             "hm-sd-2.0-fast-gz",
-            "hm-wan3.0-prime-deal-mc"
+            "hm-wan3.0-prime-deal-mc",
+            "官转-Sd-2.5-flash-支持人脸",
+            "官转-Sd-2.0-fast-支持人脸"
           ]
         }
       ]
