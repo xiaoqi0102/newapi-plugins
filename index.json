@@ -734,13 +734,15 @@
       "name": "VideoPipe",
       "icon": "text:vp",
       "description": {
-        "en": "VideoPipe (videopipe.cc) creative-station video generation, credits billing.",
-        "zh": "VideoPipe 创作站（videopipe.cc）视频生成，积分计费。"
+        "en": "VideoPipe (videopipe.cc) creative-station video generation: 3 modes, credits billing.",
+        "zh": "VideoPipe 创作站（videopipe.cc）视频生成，3 档模式，积分计费。"
       },
       "models": [
-        "videopipe-video"
+        "videopipe-2.0",
+        "videopipe-dola2.0",
+        "videopipe-sd-20-10s"
       ],
-      "latest": "1.0.1",
+      "latest": "1.0.2",
       "versions": [
         {
           "version": "1.0.0",
@@ -763,13 +765,26 @@
             "videopipe.cc"
           ],
           "baseUrl": "https://videopipe.cc"
+        },
+        {
+          "version": "1.0.2",
+          "path": "plugins/tasks/videopipe/1.0.2/plugin.js",
+          "sha256": "5278e95125c1d2cd2e8d7e5c316a719fe65a2f19c96100ab2e86ad4a489de82c",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "videopipe.cc"
+          ],
+          "baseUrl": "https://videopipe.cc"
         }
       ],
       "protocols": [
         {
           "name": "openai_video",
           "models": [
-            "videopipe-video"
+            "videopipe-2.0",
+            "videopipe-dola2.0",
+            "videopipe-sd-20-10s"
           ]
         }
       ]
