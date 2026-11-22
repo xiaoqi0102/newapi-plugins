@@ -204,7 +204,7 @@
         "特价MC-Sd-2.0-满血-CP-按条-1080p-8.00",
         "特价MC-Sd-2.0-满血-CP-按条-4k-19.20"
       ],
-      "latest": "1.0.7",
+      "latest": "1.0.8",
       "versions": [
         {
           "version": "1.0.0",
@@ -287,6 +287,17 @@
           "version": "1.0.7",
           "path": "plugins/tasks/huimiao/1.0.7/plugin.js",
           "sha256": "a8b2b9d1255c3c9b5a7a31c74896f31631fc243f05a4933cd67ad25e24d8cffa",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "huimiaovip.com"
+          ],
+          "baseUrl": "https://huimiaovip.com"
+        },
+        {
+          "version": "1.0.8",
+          "path": "plugins/tasks/huimiao/1.0.8/plugin.js",
+          "sha256": "c73f7f9b5703ea145c6ca4619d1bfaa6a5a3ecececc4b699648b4b324cdf5982",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
