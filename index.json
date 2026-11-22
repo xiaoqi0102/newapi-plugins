@@ -204,7 +204,7 @@
         "特价MC-Sd-2.0-满血-CP-按条-1080p-8.00",
         "特价MC-Sd-2.0-满血-CP-按条-4k-19.20"
       ],
-      "latest": "1.0.6",
+      "latest": "1.0.7",
       "versions": [
         {
           "version": "1.0.0",
@@ -282,6 +282,17 @@
             "huimiaovip.com"
           ],
           "baseUrl": "https://huimiaovip.com"
+        },
+        {
+          "version": "1.0.7",
+          "path": "plugins/tasks/huimiao/1.0.7/plugin.js",
+          "sha256": "a8b2b9d1255c3c9b5a7a31c74896f31631fc243f05a4933cd67ad25e24d8cffa",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "huimiaovip.com"
+          ],
+          "baseUrl": "https://huimiaovip.com"
         }
       ],
       "protocols": [
@@ -315,6 +326,54 @@
             "特价MC-Sd-2.0-满血-CP-按条-1080p-8.00",
             "特价MC-Sd-2.0-满血-CP-按条-4k-19.20"
           ]
+        }
+      ],
+      "usageSchema": {
+        "resolution": {
+          "enum": [
+            "480p",
+            "720p",
+            "768p",
+            "1080p",
+            "2k",
+            "4k"
+          ],
+          "description": {
+            "en": "Output resolution actually sent upstream",
+            "zh": "实际提交给上游的出片分辨率"
+          },
+          "enumLabels": {
+            "480p": "480p",
+            "720p": "720p",
+            "768p": "768p",
+            "1080p": "1080p",
+            "2k": "2K",
+            "4k": "4K"
+          }
+        },
+        "seconds": {
+          "type": "number",
+          "unit": "second",
+          "description": {
+            "en": "Generated video duration",
+            "zh": "生成视频时长"
+          }
+        }
+      },
+      "usageExamples": [
+        {
+          "label": "480p · 5s",
+          "facts": {
+            "resolution": "480p",
+            "seconds": 5
+          }
+        },
+        {
+          "label": "720p · 15s",
+          "facts": {
+            "resolution": "720p",
+            "seconds": 15
+          }
         }
       ]
     },
