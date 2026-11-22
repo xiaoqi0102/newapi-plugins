@@ -183,6 +183,7 @@
         "hm-video-sd-2.0-mini-gz",
         "hm-video-sd-2.0-fast-gz",
         "hm-video-sd-2.0-full-gz",
+        "hm-video-sd-2.0-full-mc",
         "hm-video-wan3.0-deal-mm",
         "hm-sd-2.5-30-0-10-m",
         "hm-video-sd-2.5-full-gz",
@@ -197,10 +198,13 @@
         "hm-sd-2.0-mini-gz",
         "hm-sd-2.0-fast-gz",
         "hm-wan3.0-prime-deal-mc",
-        "官转-Sd-2.5-flash-支持人脸",
-        "官转-Sd-2.0-fast-支持人脸"
+        "官转-Sd-2.0-满血-支持人脸",
+        "特价MC-Sd-2.0-满血-CP-按条-480p",
+        "特价MC-Sd-2.0-满血-CP-按条-720p",
+        "特价MC-Sd-2.0-满血-CP-按条-1080p",
+        "特价MC-Sd-2.0-满血-CP-按条-4k"
       ],
-      "latest": "1.0.4",
+      "latest": "1.0.5",
       "versions": [
         {
           "version": "1.0.0",
@@ -256,6 +260,17 @@
             "huimiaovip.com"
           ],
           "baseUrl": "https://huimiaovip.com"
+        },
+        {
+          "version": "1.0.5",
+          "path": "plugins/tasks/huimiao/1.0.5/plugin.js",
+          "sha256": "ba0ec0f525f73d7b48dd592fe67a0cddb7a5a968f247cb811c1d3e8d9b253228",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "huimiaovip.com"
+          ],
+          "baseUrl": "https://huimiaovip.com"
         }
       ],
       "protocols": [
@@ -268,6 +283,7 @@
             "hm-video-sd-2.0-mini-gz",
             "hm-video-sd-2.0-fast-gz",
             "hm-video-sd-2.0-full-gz",
+            "hm-video-sd-2.0-full-mc",
             "hm-video-wan3.0-deal-mm",
             "hm-sd-2.5-30-0-10-m",
             "hm-video-sd-2.5-full-gz",
@@ -282,8 +298,11 @@
             "hm-sd-2.0-mini-gz",
             "hm-sd-2.0-fast-gz",
             "hm-wan3.0-prime-deal-mc",
-            "官转-Sd-2.5-flash-支持人脸",
-            "官转-Sd-2.0-fast-支持人脸"
+            "官转-Sd-2.0-满血-支持人脸",
+            "特价MC-Sd-2.0-满血-CP-按条-480p",
+            "特价MC-Sd-2.0-满血-CP-按条-720p",
+            "特价MC-Sd-2.0-满血-CP-按条-1080p",
+            "特价MC-Sd-2.0-满血-CP-按条-4k"
           ]
         }
       ]
