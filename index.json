@@ -13,7 +13,7 @@
       "models": [
         "seedance2.0-900-fast"
       ],
-      "latest": "1.0.8",
+      "latest": "1.0.10",
       "versions": [
         {
           "version": "1.0.5",
@@ -62,6 +62,18 @@
             "aicost.me"
           ],
           "baseUrl": "https://www.aicost.me"
+        },
+        {
+          "version": "1.0.10",
+          "path": "plugins/tasks/aicost/1.0.10/plugin.js",
+          "sha256": "f8070e5653625921e79ee37317eafeb99345016fb128c8214b965ad1d1ddf1fb",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "www.aicost.me",
+            "aicost.me"
+          ],
+          "baseUrl": "https://www.aicost.me"
         }
       ],
       "protocols": [
@@ -90,7 +102,7 @@
         "happyhorse-1.0-i2v",
         "happyhorse-1.0-r2v"
       ],
-      "latest": "1.0.3",
+      "latest": "1.0.5",
       "versions": [
         {
           "version": "1.0.0",
@@ -129,6 +141,17 @@
           "version": "1.0.3",
           "path": "plugins/tasks/gaisc/1.0.3/plugin.js",
           "sha256": "6aa8e638451a127c4f250aa040799d2f9058fb2f680fdc850fb6af3f27d870ca",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "g-aisc.xyz"
+          ],
+          "baseUrl": "https://g-aisc.xyz"
+        },
+        {
+          "version": "1.0.5",
+          "path": "plugins/tasks/gaisc/1.0.5/plugin.js",
+          "sha256": "b7d994fc93f30e72abaa05f498d1f39382825e52bc10af746d83155e27195a71",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -203,7 +226,7 @@
         "特价MC-Sd-2.0-满血-CP-按条",
         "特价N-Sd-2.5-30-10-10-720-支持人脸"
       ],
-      "latest": "1.0.10",
+      "latest": "1.0.12",
       "versions": [
         {
           "version": "1.0.0",
@@ -325,6 +348,17 @@
             "huimiaovip.com"
           ],
           "baseUrl": "https://huimiaovip.com"
+        },
+        {
+          "version": "1.0.12",
+          "path": "plugins/tasks/huimiao/1.0.12/plugin.js",
+          "sha256": "9672d2694f80e0b97d212effdfd7f05c5a7b0c5846935eeebfac513b6aba9d84",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "huimiaovip.com"
+          ],
+          "baseUrl": "https://huimiaovip.com"
         }
       ],
       "protocols": [
@@ -428,7 +462,7 @@
         "sd-2.5-j5-v2",
         "minimax-h3-jiasu"
       ],
-      "latest": "1.0.17",
+      "latest": "1.0.19",
       "versions": [
         {
           "version": "1.0.7",
@@ -564,6 +598,21 @@
             "m.jiasuapi.com",
             "media.jiasuapi.com"
           ]
+        },
+        {
+          "version": "1.0.19",
+          "path": "plugins/tasks/jiasuapi/1.0.19/plugin.js",
+          "sha256": "baed4d388acc6acaeb049ccbc2cfdfd27a866d646d2633332227b7461f68db0c",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "ai.jiasuapi.com",
+            "ai1.jiasuapi.com",
+            "api.jiasuapi.com",
+            "relay.jiasuapi.com",
+            "m.jiasuapi.com",
+            "media.jiasuapi.com"
+          ]
         }
       ],
       "routes": [
@@ -641,7 +690,7 @@
       "models": [
         "sd-2-c1"
       ],
-      "latest": "1.0.2",
+      "latest": "1.0.4",
       "versions": [
         {
           "version": "1.0.0",
@@ -669,6 +718,17 @@
           "version": "1.0.2",
           "path": "plugins/tasks/meaicc/1.0.2/plugin.js",
           "sha256": "09755c0170167dfdac673cf0141580450a81ac0eeaf0ec860744bbd76f043e6d",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "api.meaicc.com"
+          ],
+          "baseUrl": "https://api.meaicc.com"
+        },
+        {
+          "version": "1.0.4",
+          "path": "plugins/tasks/meaicc/1.0.4/plugin.js",
+          "sha256": "7c13cacb5fcc72e5ba7f385a9f34737ad1552574d8677689c56ebc4dd05eb31f",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -714,12 +774,23 @@
         "seedance-2.0480p",
         "Seedance-933-720p"
       ],
-      "latest": "1.0.0",
+      "latest": "1.0.2",
       "versions": [
         {
           "version": "1.0.0",
           "path": "plugins/tasks/qihang/1.0.0/plugin.js",
           "sha256": "aae227cccb7a11a4a9b0073b76685fc5309808688756d6cd4ca3012304db27ba",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "166683.xyz"
+          ],
+          "baseUrl": "https://166683.xyz"
+        },
+        {
+          "version": "1.0.2",
+          "path": "plugins/tasks/qihang/1.0.2/plugin.js",
+          "sha256": "87556ee0fc394d1b5cbdae1210c69656427209042f94f8bba54636d974cfcc0d",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -771,7 +842,7 @@
         "sdas-qd-seedance-2.0-mini-no-face-720p",
         "sdas-qd-seedance-2.0-no-face-480p"
       ],
-      "latest": "1.0.5",
+      "latest": "1.0.7",
       "versions": [
         {
           "version": "1.0.1",
@@ -829,6 +900,19 @@
           "version": "1.0.5",
           "path": "plugins/tasks/sudashui/1.0.5/plugin.js",
           "sha256": "0b32f5d072ea8af0da50ab6ba330d593047609aa154c47cc876c57cc51d7d598",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "api.sudashuiapi.com",
+            "files.sudashuiapi.com",
+            "www.sudashuiapi.com"
+          ],
+          "baseUrl": "https://api.sudashuiapi.com"
+        },
+        {
+          "version": "1.0.7",
+          "path": "plugins/tasks/sudashui/1.0.7/plugin.js",
+          "sha256": "a35ef6f927fda4bf392d1046d98be6715b37bf0405800ae9b73acf983c189e63",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -898,7 +982,7 @@
         "videopipe-2.0",
         "videopipe-dola2.0"
       ],
-      "latest": "1.0.4",
+      "latest": "1.0.6",
       "versions": [
         {
           "version": "1.0.0",
@@ -948,6 +1032,17 @@
           "version": "1.0.4",
           "path": "plugins/tasks/videopipe/1.0.4/plugin.js",
           "sha256": "6538ac4cac28142b64bdcc501da36e7288669eaad8509fc21b8d6d21d8875f63",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "videopipe.cc"
+          ],
+          "baseUrl": "https://videopipe.cc"
+        },
+        {
+          "version": "1.0.6",
+          "path": "plugins/tasks/videopipe/1.0.6/plugin.js",
+          "sha256": "54b45a4efaf7dd9420c196d5a427828d988a140fa5d0e64c4965b9d5d49db641",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
