@@ -977,7 +977,7 @@
       "models": [
         "seedance-2.5-plus"
       ],
-      "latest": "1.0.2",
+      "latest": "1.0.3",
       "versions": [
         {
           "version": "1.0.0",
@@ -1005,6 +1005,17 @@
           "version": "1.0.2",
           "path": "plugins/tasks/vinted/1.0.2/plugin.js",
           "sha256": "13e826287b0b66231659b96e9e30c1326a5ebe30b11f2c3758e8c950f66155a3",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "vinted.cam"
+          ],
+          "baseUrl": "https://vinted.cam"
+        },
+        {
+          "version": "1.0.3",
+          "path": "plugins/tasks/vinted/1.0.3/plugin.js",
+          "sha256": "8e7ec06a5d8121090a9e0a4da2e9c4884ccfe868f54a5851cb9bb228ebc0ea9f",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
