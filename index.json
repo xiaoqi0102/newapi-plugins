@@ -945,6 +945,105 @@
           ]
         }
       ]
+    },
+    {
+      "key": "vinted",
+      "name": "Seedance 聚合",
+      "icon": "text:VT",
+      "description": {
+        "en": "vinted.cam Seedance aggregation: seedance-2.5-plus (480p/720p, 4-30s, 21:9), per-call credits.",
+        "zh": "vinted.cam Seedance 聚合：seedance-2.5-plus 特价无限并发（480p/720p，4–30 秒，21:9 等 6 种画幅）。"
+      },
+      "models": [
+        "seedance-2.5-plus",
+        "seedance-2.5-plus-480p",
+        "seedance-2.5-plus-720p"
+      ],
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugins/tasks/vinted/1.0.0/plugin.js",
+          "sha256": "5ff4b01ccf12e6333134bd85d2bc73912470419b62908e8bcc1550de80b2e603",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "vinted.cam"
+          ],
+          "baseUrl": "https://vinted.cam"
+        }
+      ],
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/vinted/v1/videos/generations",
+          "type": "submit",
+          "action": "video",
+          "decode": "decodeVideoSubmit",
+          "render": "taskCreated",
+          "models": [
+            "seedance-2.5-plus",
+            "seedance-2.5-plus-480p",
+            "seedance-2.5-plus-720p"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/vinted/v1/videos/tasks/:task_id",
+          "type": "query",
+          "render": "taskStatus"
+        }
+      ],
+      "protocols": [
+        {
+          "name": "openai_video",
+          "models": [
+            "seedance-2.5-plus",
+            "seedance-2.5-plus-480p",
+            "seedance-2.5-plus-720p"
+          ]
+        }
+      ],
+      "usageSchema": {
+        "resolution": {
+          "enum": [
+            "480p",
+            "720p"
+          ],
+          "description": {
+            "en": "Resolution actually sent upstream",
+            "zh": "实际提交给上游的出片分辨率"
+          },
+          "enumLabels": {
+            "480p": "480p",
+            "720p": "720p"
+          }
+        },
+        "seconds": {
+          "type": "number",
+          "unit": "second",
+          "description": {
+            "en": "Generated video duration",
+            "zh": "生成视频时长"
+          }
+        }
+      },
+      "usageExamples": [
+        {
+          "label": "480p · 5s",
+          "facts": {
+            "resolution": "480p",
+            "seconds": 5
+          }
+        },
+        {
+          "label": "720p · 15s",
+          "facts": {
+            "resolution": "720p",
+            "seconds": 15
+          }
+        }
+      ]
     }
   ]
 }
