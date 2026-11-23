@@ -955,16 +955,25 @@
         "zh": "vinted.cam Seedance 聚合：seedance-2.5-plus 特价无限并发（480p/720p，4–30 秒，21:9 等 6 种画幅）。"
       },
       "models": [
-        "seedance-2.5-plus",
-        "seedance-2.5-plus-480p",
-        "seedance-2.5-plus-720p"
+        "seedance-2.5-plus"
       ],
-      "latest": "1.0.0",
+      "latest": "1.0.1",
       "versions": [
         {
           "version": "1.0.0",
           "path": "plugins/tasks/vinted/1.0.0/plugin.js",
           "sha256": "5ff4b01ccf12e6333134bd85d2bc73912470419b62908e8bcc1550de80b2e603",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "vinted.cam"
+          ],
+          "baseUrl": "https://vinted.cam"
+        },
+        {
+          "version": "1.0.1",
+          "path": "plugins/tasks/vinted/1.0.1/plugin.js",
+          "sha256": "c8cd02c72e758d57009443e7662573b4930540c39a94603959ae5c63c0cf9d7f",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -982,9 +991,7 @@
           "decode": "decodeVideoSubmit",
           "render": "taskCreated",
           "models": [
-            "seedance-2.5-plus",
-            "seedance-2.5-plus-480p",
-            "seedance-2.5-plus-720p"
+            "seedance-2.5-plus"
           ]
         },
         {
@@ -998,9 +1005,7 @@
         {
           "name": "openai_video",
           "models": [
-            "seedance-2.5-plus",
-            "seedance-2.5-plus-480p",
-            "seedance-2.5-plus-720p"
+            "seedance-2.5-plus"
           ]
         }
       ],
