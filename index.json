@@ -197,14 +197,13 @@
         "hm-sd-2.5-30-0-10-720-gz-persecond-ll",
         "hm-sd-2.0-mini-gz",
         "hm-sd-2.0-fast-gz",
+        "hm-sd-2.5-30-10-deal-n",
         "hm-wan3.0-prime-deal-mc",
         "官转-Sd-2.0-满血-支持人脸-2.40",
-        "特价MC-Sd-2.0-满血-CP-按条-480p-2.40",
-        "特价MC-Sd-2.0-满血-CP-按条-720p-3.52",
-        "特价MC-Sd-2.0-满血-CP-按条-1080p-8.00",
-        "特价MC-Sd-2.0-满血-CP-按条-4k-19.20"
+        "特价MC-Sd-2.0-满血-CP-按条",
+        "特价N-Sd-2.5-30-10-10-720-支持人脸"
       ],
-      "latest": "1.0.8",
+      "latest": "1.0.10",
       "versions": [
         {
           "version": "1.0.0",
@@ -304,6 +303,28 @@
             "huimiaovip.com"
           ],
           "baseUrl": "https://huimiaovip.com"
+        },
+        {
+          "version": "1.0.9",
+          "path": "plugins/tasks/huimiao/1.0.9/plugin.js",
+          "sha256": "593eaccd65232f815f2f4255eceadeff69e32ecf5a3472e530284ee2329cb8f7",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "huimiaovip.com"
+          ],
+          "baseUrl": "https://huimiaovip.com"
+        },
+        {
+          "version": "1.0.10",
+          "path": "plugins/tasks/huimiao/1.0.10/plugin.js",
+          "sha256": "ad5a9681629446ab9a01928bd60287962f348b683ad2cbc7c8a07ebc73ac09bd",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "huimiaovip.com"
+          ],
+          "baseUrl": "https://huimiaovip.com"
         }
       ],
       "protocols": [
@@ -330,12 +351,11 @@
             "hm-sd-2.5-30-0-10-720-gz-persecond-ll",
             "hm-sd-2.0-mini-gz",
             "hm-sd-2.0-fast-gz",
+            "hm-sd-2.5-30-10-deal-n",
             "hm-wan3.0-prime-deal-mc",
             "官转-Sd-2.0-满血-支持人脸-2.40",
-            "特价MC-Sd-2.0-满血-CP-按条-480p-2.40",
-            "特价MC-Sd-2.0-满血-CP-按条-720p-3.52",
-            "特价MC-Sd-2.0-满血-CP-按条-1080p-8.00",
-            "特价MC-Sd-2.0-满血-CP-按条-4k-19.20"
+            "特价MC-Sd-2.0-满血-CP-按条",
+            "特价N-Sd-2.5-30-10-10-720-支持人脸"
           ]
         }
       ],
