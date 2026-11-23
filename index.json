@@ -1066,7 +1066,7 @@
         "videopipe-2.0",
         "videopipe-dola2.0"
       ],
-      "latest": "1.0.7",
+      "latest": "1.0.8",
       "versions": [
         {
           "version": "1.0.0",
@@ -1144,6 +1144,17 @@
             "videopipe.cc"
           ],
           "baseUrl": "https://videopipe.cc"
+        },
+        {
+          "version": "1.0.8",
+          "path": "plugins/tasks/videopipe/1.0.8/plugin.js",
+          "sha256": "7593c82c18ce030e93bb658e7a9595064fe72aa9f2ed8b2962d7f0948f088302",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "videopipe.cc"
+          ],
+          "baseUrl": "https://videopipe.cc"
         }
       ],
       "protocols": [
@@ -1167,7 +1178,7 @@
       "models": [
         "seedance-2.5-plus"
       ],
-      "latest": "1.0.6",
+      "latest": "1.0.9",
       "versions": [
         {
           "version": "1.0.0",
@@ -1243,6 +1254,43 @@
           "kind": "task",
           "allowedHosts": [
             "vinted.cam"
+          ],
+          "baseUrl": "https://vinted.cam"
+        },
+        {
+          "version": "1.0.7",
+          "path": "plugins/tasks/vinted/1.0.7/plugin.js",
+          "sha256": "1a5786751462c73b31a8704d194e3e9b99613d549ce09317d06e2433c8f74710",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "vinted.cam"
+          ],
+          "baseUrl": "https://vinted.cam"
+        },
+        {
+          "version": "1.0.8",
+          "path": "plugins/tasks/vinted/1.0.8/plugin.js",
+          "sha256": "01a381bbb9ffad2f256da73c8e2a65052c6145e8765706fe6e2cd7a8c6182769",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "vinted.cam",
+            "cdn-video.vinted.cam",
+            "*.vinted.cam"
+          ],
+          "baseUrl": "https://vinted.cam"
+        },
+        {
+          "version": "1.0.9",
+          "path": "plugins/tasks/vinted/1.0.9/plugin.js",
+          "sha256": "8deade74c19dabaf00a0e02a967f3646702301e0e5a99e2e307b09fb93c18bd2",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "vinted.cam",
+            "cdn-video.vinted.cam",
+            "*.vinted.cam"
           ],
           "baseUrl": "https://vinted.cam"
         }
