@@ -23,6 +23,7 @@
 | [`meaicc`](plugins/tasks/meaicc/1.0.2/README.md) | MeAICC API | https://api.meaicc.com | 1.0.2 | 1 | 按次 |
 | [`gaisc`](plugins/tasks/gaisc/1.0.3/README.md) | g-aisc API | https://g-aisc.xyz | 1.0.3 | 7 | 按次 |
 | [`qihang`](plugins/tasks/qihang/1.0.0/README.md) | 启航 API | https://166683.xyz | 1.0.0 | 2 | 按次 |
+| [`vinted`](plugins/tasks/vinted/1.0.0/README.md) | Seedance 聚合 | https://vinted.cam | 1.0.0 | 3 | 按次 |
 
 声明模型数 ≥ 渠道实际挂载数:插件只声明"上游明确支持"的模型,每个渠道按自己的 Key 勾选子集。
 
