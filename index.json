@@ -977,7 +977,7 @@
       "models": [
         "seedance-2.5-plus"
       ],
-      "latest": "1.0.1",
+      "latest": "1.0.2",
       "versions": [
         {
           "version": "1.0.0",
@@ -994,6 +994,17 @@
           "version": "1.0.1",
           "path": "plugins/tasks/vinted/1.0.1/plugin.js",
           "sha256": "c8cd02c72e758d57009443e7662573b4930540c39a94603959ae5c63c0cf9d7f",
+          "minApiVersion": 1,
+          "kind": "task",
+          "allowedHosts": [
+            "vinted.cam"
+          ],
+          "baseUrl": "https://vinted.cam"
+        },
+        {
+          "version": "1.0.2",
+          "path": "plugins/tasks/vinted/1.0.2/plugin.js",
+          "sha256": "13e826287b0b66231659b96e9e30c1326a5ebe30b11f2c3758e8c950f66155a3",
           "minApiVersion": 1,
           "kind": "task",
           "allowedHosts": [
@@ -1043,29 +1054,19 @@
             "480p": "480p",
             "720p": "720p"
           }
-        },
-        "seconds": {
-          "type": "number",
-          "unit": "second",
-          "description": {
-            "en": "Generated video duration",
-            "zh": "生成视频时长"
-          }
         }
       },
       "usageExamples": [
         {
-          "label": "480p · 5s",
+          "label": "480p",
           "facts": {
-            "resolution": "480p",
-            "seconds": 5
+            "resolution": "480p"
           }
         },
         {
-          "label": "720p · 15s",
+          "label": "720p",
           "facts": {
-            "resolution": "720p",
-            "seconds": 15
+            "resolution": "720p"
           }
         }
       ]
